@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./header.module.css";
@@ -9,6 +9,15 @@ import { BsHeart, BsPerson, BsBag, BsGift, BsList } from "react-icons/bs";
 export default function Header() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
+
+    // Detect screen size
+    useEffect(() => {
+        const handleResize = () => setIsMobile(window.innerWidth <= 992);
+        handleResize(); // initial check
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
 
     const handleLogin = () => setIsLoggedIn(!isLoggedIn);
 
@@ -39,8 +48,8 @@ export default function Header() {
 
                     {/* Nav Links & User icons (center on desktop, dropdown on mobile) */}
                     <div className={`${styles.navLinks} ${menuOpen ? styles.showMenu : ""}`}>
-                        {/* User icons row at top of menu (mobile only) */}
-                        {isLoggedIn && (
+                        {/* Mobile user icons - only show on mobile & logged in */}
+                        {isLoggedIn && isMobile && (
                             <ul className={styles.mobileUserIcons}>
                                 <li><BsHeart /></li>
                                 <li><BsPerson /></li>
@@ -57,35 +66,39 @@ export default function Header() {
                         </ul>
                     </div>
 
-                    {/* Right section - visible only on desktop */}
-                    <div className={styles.userSection}>
-                        {!isLoggedIn ? (
-                            <button onClick={handleLogin} className={styles.loginBtn}>
-                                Login
-                            </button>
-                        ) : (
-                            <ul className={styles.userIcons}>
-                                <li><BsHeart /></li>
-                                <li><BsPerson /></li>
-                                <li><BsBag /></li>
-                            </ul>
-                        )}
-                    </div>
+                    {/* Right section - desktop only */}
+                    {!isMobile && (
+                        <div className={styles.userSection}>
+                            {!isLoggedIn ? (
+                                <button onClick={handleLogin} className={styles.loginBtn}>
+                                    Login
+                                </button>
+                            ) : (
+                                <ul className={styles.userIcons}>
+                                    <li><BsHeart /></li>
+                                    <li><BsPerson /></li>
+                                    <li><BsBag /></li>
+                                </ul>
+                            )}
+                        </div>
+                    )}
 
                     {/* Mobile actions (menu + login) */}
-                    <div className={styles.mobileActions}>
-                        {!isLoggedIn && (
-                            <button onClick={handleLogin} className={styles.loginBtn}>
-                                Login
+                    {isMobile && (
+                        <div className={styles.mobileActions}>
+                            {!isLoggedIn && (
+                                <button onClick={handleLogin} className={styles.loginBtn}>
+                                    Login
+                                </button>
+                            )}
+                            <button
+                                className={styles.menuToggle}
+                                onClick={() => setMenuOpen(!menuOpen)}
+                            >
+                                <BsList size={28} />
                             </button>
-                        )}
-                        <button
-                            className={styles.menuToggle}
-                            onClick={() => setMenuOpen(!menuOpen)}
-                        >
-                            <BsList size={28} />
-                        </button>
-                    </div>
+                        </div>
+                    )}
                 </div>
             </nav>
         </header>
