@@ -5,11 +5,13 @@ import Link from "next/link";
 import Image from "next/image";
 import styles from "./header.module.css";
 import { BsHeart, BsPerson, BsBag, BsGift, BsList } from "react-icons/bs";
+import { useAlert } from "../alert/alertProvider";
 
 export default function Header() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
+    const { showAlert } = useAlert();
 
     // Detect screen size
     useEffect(() => {
@@ -19,7 +21,26 @@ export default function Header() {
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
-    const handleLogin = () => setIsLoggedIn(!isLoggedIn);
+    const handleLogin = () => {
+        setIsLoggedIn(!isLoggedIn);
+
+        // 👇 Show alert when user clicks login or logout
+        if (!isLoggedIn) {
+            showAlert({
+                message: "Successfully logged in!",
+                type: "success",
+                autoDismiss: true,
+                duration: 3000,
+            });
+        } else {
+            showAlert({
+                message: "You have logged out.",
+                type: "info",
+                autoDismiss: true,
+                duration: 3000,
+            });
+        }
+    };
 
     return (
         <header className={styles.mainHeader}>

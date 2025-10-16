@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/header/header";
 import Footer from "@/components/footer/footer";
+import { AlertProvider } from "@/components/alert/alertProvider";
 
 export const metadata: Metadata = {
   title: "LuvWish",
@@ -12,9 +13,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className="min-h-screen flex flex-col">
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <AlertProvider>
+          <Header />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </AlertProvider>
       </body>
     </html>
   );
