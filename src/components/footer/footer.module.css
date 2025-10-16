@@ -1,0 +1,134 @@
+.footerContainer {
+    font-family: 'Arial', sans-serif;
+    background: #fff;
+    color: #222;
+    position: relative;
+    box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.05);
+}
+
+.footerTop {
+    display: flex;
+    justify-content: space-between;
+    padding: 4rem 5%;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.footerBrand {
+    flex: 1 1 250px;
+    max-width: 300px;
+}
+
+.footerLogo {
+    max-width: 150px;
+    margin-bottom: 1rem;
+}
+
+.footerBrand p {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.6;
+}
+
+.socialIcons {
+    margin-top: 1.2rem;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.socialIcons a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #f0f0f0;
+    color: #333;
+    transition: all 0.3s ease;
+    font-size: 1.2rem;
+}
+
+.socialIcons a:hover {
+    background: #e6007e;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.footerLinks {
+    display: flex;
+    flex: 3 1 600px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.footerLinks div h5 {
+    font-size: 1.05rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    color: #111;
+}
+
+.footerLinks ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footerLinks ul li {
+    margin-bottom: 0.6rem;
+    font-size: 0.95rem;
+    color: #555;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.footerLinks ul li:hover {
+    color: #e6007e;
+}
+
+.footerCurve {
+    width: 100%;
+    height: 120px;
+    background: linear-gradient(135deg, #ffe6f0, #f0e6ff);
+    clip-path: ellipse(70% 100% at 50% 0%);
+    margin-top: -40px;
+    border-bottom-left-radius: 50% 20%;
+    border-bottom-right-radius: 50% 20%;
+    transition: background 0.5s ease;
+}
+
+.footerCurve:hover {
+    background: linear-gradient(135deg, #f0e6ff, #ffe6f0);
+}
+
+.footerBottom {
+    text-align: center;
+    font-size: 0.85rem;
+    color: #999;
+    padding-bottom: 2rem;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .footerTop {
+        padding: 3rem 5%;
+        gap: 3rem;
+    }
+
+    .footerLinks {
+        flex-direction: column;
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .footerTop {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .footerBrand {
+        max-width: 100%;
+    }
+}
