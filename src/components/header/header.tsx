@@ -48,6 +48,14 @@ export default function Header() {
 
                     {/* Nav Links & User icons (center on desktop, dropdown on mobile) */}
                     <div className={`${styles.navLinks} ${menuOpen ? styles.showMenu : ""}`}>
+                        {/* Nav Links */}
+                        <ul>
+                            <li><Link href="/" className={styles.navLink}>Home</Link></li>
+                            <li><Link href="/products" className={styles.navLink}>Products</Link></li>
+                            <li><Link href="/contact" className={styles.navLink}>Contact</Link></li>
+                            <li><Link href="/about" className={styles.navLink}>About Us</Link></li>
+                        </ul>
+
                         {/* Mobile user icons - only show on mobile & logged in */}
                         {isLoggedIn && isMobile && (
                             <ul className={styles.mobileUserIcons}>
@@ -56,14 +64,6 @@ export default function Header() {
                                 <li><BsBag /></li>
                             </ul>
                         )}
-
-                        {/* Nav Links */}
-                        <ul>
-                            <li><Link href="/" className={styles.navLink}>Home</Link></li>
-                            <li><Link href="/products" className={styles.navLink}>Products</Link></li>
-                            <li><Link href="/contact" className={styles.navLink}>Contact</Link></li>
-                            <li><Link href="/about" className={styles.navLink}>About Us</Link></li>
-                        </ul>
                     </div>
 
                     {/* Right section - desktop only */}

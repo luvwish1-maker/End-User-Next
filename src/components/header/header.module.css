@@ -67,6 +67,8 @@
     align-items: center;
     justify-content: center;
     flex: 1;
+    width: 100%;
+    z-index: 1000;
 }
 
 .navLinks ul {
