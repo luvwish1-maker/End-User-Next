@@ -1,0 +1,203 @@
+.mainHeader {
+    background-color: #fff0f5;
+    width: 100%;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* ---------- Top Label ---------- */
+.label {
+    background-color: #ffe4efac;
+    text-align: center;
+    padding: 8px 0;
+}
+
+.label p {
+    margin: 0;
+    display: inline-block;
+    background: white;
+    border-radius: 50px;
+    padding: 6px 16px;
+    font-size: 16px;
+    line-height: 20px;
+    color: #1F1F1F;
+}
+
+.label span {
+    color: #A51058;
+    margin: 0 4px;
+}
+
+/* ---------- Navbar ---------- */
+.navbar {
+    padding: 10px 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    border-bottom: 1px solid #eee;
+}
+
+.navContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1300px;
+    position: relative;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.logo {
+    width: 130px;
+    height: 34px;
+    object-fit: contain;
+}
+
+/* ---------- Nav Links ---------- */
+.navLinks {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+}
+
+.navLinks ul {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    margin: 0;
+    padding: 0;
+}
+
+.navLink {
+    font-size: 16px;
+    color: #1F1F1F;
+    padding: 8px 15px;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.navLink:hover {
+    background-color: #FFE4EF;
+    color: #A51058;
+}
+
+/* ---------- Login Button ---------- */
+.loginBtn {
+    background-color: #A51058;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    font-size: 16px;
+    padding: 8px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.loginBtn:hover {
+    background-color: #821044;
+}
+
+/* ---------- User Icons ---------- */
+.userSection {
+    display: flex;
+    align-items: center;
+    margin-left: 30px;
+}
+
+.userIcons {
+    list-style: none;
+    display: flex;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+}
+
+.userIcons li {
+    background-color: #FFE4EF;
+    border-radius: 20px;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.userIcons li:hover {
+    background-color: #A51058;
+    color: white;
+}
+
+/* ---------- Mobile ---------- */
+.mobileActions {
+    display: none;
+    align-items: center;
+    gap: 10px;
+}
+
+.menuToggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 992px) {
+    .navbar {
+        padding: 10px 20px;
+    }
+
+    .navLinks {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: white;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        padding: 20px 0;
+        border-top: 1px solid #eee;
+        display: none;
+    }
+
+    .showMenu {
+        display: flex;
+    }
+
+    .navLinks ul {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .userSection {
+        margin-left: 0;
+    }
+
+    .mobileActions {
+        display: flex;
+        margin-left: auto;
+    }
+
+    .loginBtn {
+        font-size: 14px;
+        padding: 6px 15px;
+    }
+}
+
+@media (max-width: 576px) {
+    .label p {
+        font-size: 14px;
+        padding: 4px 10px;
+    }
+}
