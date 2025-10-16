@@ -1,3 +1,7 @@
+.mobileUserIcons {
+    display: none;
+}
+
 .mainHeader {
     background-color: #fff0f5;
     width: 100%;
@@ -193,6 +197,36 @@
     .loginBtn {
         font-size: 14px;
         padding: 6px 15px;
+    }
+
+    .mobileUserIcons {
+        display: flex;
+        flex-direction: row !important;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+        width: 100%;
+        padding: 10px 0;
+        /* border-bottom: 1px solid #eee; */
+        background-color: #fff;
+    }
+
+    .mobileUserIcons li {
+        background-color: #FFE4EF;
+        border-radius: 20px;
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        color: #1F1F1F;
+    }
+
+    .mobileUserIcons li:hover {
+        background-color: #A51058;
+        color: white;
     }
 }
 

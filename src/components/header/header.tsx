@@ -28,11 +28,27 @@ export default function Header() {
                 <div className={styles.navContainer}>
                     {/* Logo */}
                     <Link href="/" className={styles.brand}>
-                        <Image src="/logo.png" alt="Logo" width={130} height={34} className={styles.logo} />
+                        <Image
+                            src="/logo.png"
+                            alt="Logo"
+                            width={130}
+                            height={34}
+                            className={styles.logo}
+                        />
                     </Link>
 
-                    {/* Nav Links (center) */}
+                    {/* Nav Links & User icons (center on desktop, dropdown on mobile) */}
                     <div className={`${styles.navLinks} ${menuOpen ? styles.showMenu : ""}`}>
+                        {/* User icons row at top of menu (mobile only) */}
+                        {isLoggedIn && (
+                            <ul className={styles.mobileUserIcons}>
+                                <li><BsHeart /></li>
+                                <li><BsPerson /></li>
+                                <li><BsBag /></li>
+                            </ul>
+                        )}
+
+                        {/* Nav Links */}
                         <ul>
                             <li><Link href="/" className={styles.navLink}>Home</Link></li>
                             <li><Link href="/products" className={styles.navLink}>Products</Link></li>
@@ -63,7 +79,10 @@ export default function Header() {
                                 Login
                             </button>
                         )}
-                        <button className={styles.menuToggle} onClick={() => setMenuOpen(!menuOpen)}>
+                        <button
+                            className={styles.menuToggle}
+                            onClick={() => setMenuOpen(!menuOpen)}
+                        >
                             <BsList size={28} />
                         </button>
                     </div>
