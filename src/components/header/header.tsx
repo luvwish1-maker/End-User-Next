@@ -31,7 +31,32 @@ export default function Header() {
                         <Image src="/logo.png" alt="Logo" width={130} height={34} className={styles.logo} />
                     </Link>
 
-                    {/* Mobile toggle + login */}
+                    {/* Nav Links (center) */}
+                    <div className={`${styles.navLinks} ${menuOpen ? styles.showMenu : ""}`}>
+                        <ul>
+                            <li><Link href="/" className={styles.navLink}>Home</Link></li>
+                            <li><Link href="/products" className={styles.navLink}>Products</Link></li>
+                            <li><Link href="/contact" className={styles.navLink}>Contact</Link></li>
+                            <li><Link href="/about" className={styles.navLink}>About Us</Link></li>
+                        </ul>
+                    </div>
+
+                    {/* Right section - visible only on desktop */}
+                    <div className={styles.userSection}>
+                        {!isLoggedIn ? (
+                            <button onClick={handleLogin} className={styles.loginBtn}>
+                                Login
+                            </button>
+                        ) : (
+                            <ul className={styles.userIcons}>
+                                <li><BsHeart /></li>
+                                <li><BsPerson /></li>
+                                <li><BsBag /></li>
+                            </ul>
+                        )}
+                    </div>
+
+                    {/* Mobile actions (menu + login) */}
                     <div className={styles.mobileActions}>
                         {!isLoggedIn && (
                             <button onClick={handleLogin} className={styles.loginBtn}>
@@ -41,31 +66,6 @@ export default function Header() {
                         <button className={styles.menuToggle} onClick={() => setMenuOpen(!menuOpen)}>
                             <BsList size={28} />
                         </button>
-                    </div>
-
-                    {/* Links */}
-                    <div className={`${styles.navLinks} ${menuOpen ? styles.showMenu : ""}`}>
-                        <ul>
-                            <li><Link href="/" className={styles.navLink}>Home</Link></li>
-                            <li><Link href="/products" className={styles.navLink}>Products</Link></li>
-                            <li><Link href="/contact" className={styles.navLink}>Contact</Link></li>
-                            <li><Link href="/about" className={styles.navLink}>About Us</Link></li>
-                        </ul>
-
-                        {/* Desktop icons / login */}
-                        <div className={styles.userSection}>
-                            {!isLoggedIn ? (
-                                <button onClick={handleLogin} className={styles.loginBtn}>
-                                    Login
-                                </button>
-                            ) : (
-                                <ul className={styles.userIcons}>
-                                    <li><BsHeart /></li>
-                                    <li><BsPerson /></li>
-                                    <li><BsBag /></li>
-                                </ul>
-                            )}
-                        </div>
                     </div>
                 </div>
             </nav>

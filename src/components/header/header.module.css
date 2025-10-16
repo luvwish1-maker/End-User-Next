@@ -30,22 +30,21 @@
 /* ---------- Navbar ---------- */
 .navbar {
     padding: 10px 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     background: #fff0f5;
     border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: center;
 }
 
 .navContainer {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     width: 100%;
     max-width: 1300px;
     position: relative;
 }
 
+/* ---------- Brand ---------- */
 .brand {
     display: flex;
     align-items: center;
@@ -88,27 +87,11 @@
     color: #A51058;
 }
 
-/* ---------- Login Button ---------- */
-.loginBtn {
-    background-color: #A51058;
-    color: #fff;
-    border: none;
-    border-radius: 20px;
-    font-size: 16px;
-    padding: 8px 20px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.loginBtn:hover {
-    background-color: #821044;
-}
-
-/* ---------- User Icons ---------- */
+/* ---------- User Section (right end) ---------- */
 .userSection {
+    margin-left: auto;
     display: flex;
     align-items: center;
-    margin-left: 30px;
 }
 
 .userIcons {
@@ -117,6 +100,7 @@
     gap: 10px;
     margin: 0;
     padding: 0;
+    color: #1F1F1F;
 }
 
 .userIcons li {
@@ -136,7 +120,23 @@
     color: white;
 }
 
-/* ---------- Mobile ---------- */
+/* ---------- Login Button ---------- */
+.loginBtn {
+    background-color: #A51058;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    font-size: 16px;
+    padding: 8px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.loginBtn:hover {
+    background-color: #821044;
+}
+
+/* ---------- Mobile Actions ---------- */
 .mobileActions {
     display: none;
     align-items: center;
@@ -181,7 +181,8 @@
     }
 
     .userSection {
-        margin-left: 0;
+        display: none;
+        /* hide desktop login/icons on mobile */
     }
 
     .mobileActions {
