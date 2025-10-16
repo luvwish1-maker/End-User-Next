@@ -1,0 +1,112 @@
+.backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.modal {
+    background: #fff;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 420px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    animation: fadeIn 0.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Header */
+.modalHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem 0.5rem;
+}
+
+.modalTitle {
+    font-size: 1.25rem;
+    color: #c61469;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.icon {
+    color: #c61469;
+}
+
+.btnClose {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #777;
+    cursor: pointer;
+}
+
+.btnClose:hover {
+    color: #333;
+}
+
+/* Body */
+.modalBody {
+    text-align: center;
+    padding: 1rem 2rem;
+    color: #555;
+    font-size: 1rem;
+}
+
+/* Footer */
+.modalFooter {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    padding: 0 2rem 1.5rem;
+}
+
+/* Buttons */
+.btnBrand,
+.btnOutlineBrand {
+    min-width: 110px;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+    border-radius: 6px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+
+.btnBrand {
+    background-color: #c61469;
+    color: #fff;
+    border: none;
+}
+
+.btnBrand:hover {
+    background-color: #a30f54;
+}
+
+.btnOutlineBrand {
+    border: 2px solid #c61469;
+    background: transparent;
+    color: #c61469;
+}
+
+.btnOutlineBrand:hover {
+    background-color: #c61469;
+    color: #fff;
+}
