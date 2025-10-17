@@ -27,19 +27,21 @@
 }
 
 .heading {
-    font-size: 2rem;
-    font-weight: 700;
+    font-size: 48px;
+    font-weight: 400;
     margin-bottom: 0.5rem;
+    color: #000;
 }
 
 .heading span {
-    color: #e91e63;
+    color: #C61469;
 }
 
 .subtext {
     color: #6c757d;
-    font-size: 1rem;
+    font-size: 18px;
     max-width: 500px;
+    line-height: 29px;
 }
 
 .bottom {
@@ -61,11 +63,19 @@
     gap: 1rem;
     padding: 1rem;
     border-radius: 12px;
-    color: white;
+    border: 2px solid #FFE5EF;
+    color: #000;
+    background-color: transparent;
 }
 
 .cardIcon {
     font-size: 2rem;
+    color: white;
+    padding: 0.75rem;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .cardText {
@@ -76,11 +86,13 @@
 .cardTitle {
     font-weight: 600;
     margin: 0;
+    color: #0F0F12;
 }
 
 .cardDesc {
     font-size: 0.9rem;
     margin: 0;
+    color: #6B6B76;
 }
 
 .right {

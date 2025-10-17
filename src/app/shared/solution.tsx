@@ -1,15 +1,23 @@
-import styles from "./styles/solution.module.css"
-import { BsCheckCircle, BsBoxFill, BsHeart, BsBag, BsStars, BsDroplet } from "react-icons/bs";
+"use client";
+
+import Image from "next/image";
+import styles from "./styles/solution.module.css";
+import { BsCheckCircle, BsBoxFill, BsHeart, BsStars, BsDroplet } from "react-icons/bs";
 
 const cardsData = [
-    { icon: <BsDroplet />, title: "10 Premium Sanitary Pads", desc: "Zero Compromise Protection", bg: "#9C2CA4" },
-    { icon: <BsHeart />, title: "Dark Chocolate That Actually Heals", desc: "Natural mood booster & cramp relief", bg: "#004C35" },
-    { icon: <BsBoxFill />, title: "Disposal Bags", desc: "No More Awkward Wrapping", bg: "#E33756" },
-    { icon: <BsStars />, title: "Extra Tissues for Everything", desc: "Stay fresh and clean", bg: "#C65BF7" },
-    { icon: <BsDroplet />, title: "Stain Remover", desc: "For \"Oh Crap\" Moments", bg: "#F7C65B" },
+    { icon: BsDroplet, title: "10 Premium Sanitary Pads", desc: "Zero Compromise Protection" },
+    { icon: BsHeart, title: "Dark Chocolate That Actually Heals", desc: "Natural mood booster & cramp relief" },
+    { icon: BsBoxFill, title: "Disposal Bags", desc: "No More Awkward Wrapping" },
+    { icon: BsStars, title: "Extra Tissues for Everything", desc: "Stay fresh and clean" },
+    { icon: BsDroplet, title: "Stain Remover", desc: "For \"Oh Crap\" Moments" },
 ];
 
 export default function Solution() {
+    const gradients = [
+        "linear-gradient(180deg, #C61469 0%, #A31157 100%)",
+        "linear-gradient(135deg, #F6339A 0%, #E60076 100%)",
+    ];
+
     return (
         <div className={styles.container}>
             <div className={styles.top}>
@@ -27,20 +35,26 @@ export default function Solution() {
 
             <div className={styles.bottom}>
                 <div className={styles.left}>
-                    {cardsData.map((card, idx) => (
-                        <div className={styles.card} key={idx} style={{ backgroundColor: card.bg }}>
-                            <div className={styles.cardIcon}>{card.icon}</div>
-                            <div className={styles.cardText}>
-                                <p className={styles.cardTitle}>{card.title}</p>
-                                <p className={styles.cardDesc}>{card.desc}</p>
+                    {cardsData.map((card, idx) => {
+                        const Icon = card.icon;
+                        const gradient = gradients[idx % gradients.length];
+                        return (
+                            <div className={styles.card} key={idx}>
+                                <div className={styles.cardIcon} style={{ background: gradient }}>
+                                    <Icon />
+                                </div>
+                                <div className={styles.cardText}>
+                                    <p className={styles.cardTitle}>{card.title}</p>
+                                    <p className={styles.cardDesc}>{card.desc}</p>
+                                </div>
                             </div>
-                        </div>
-                    ))}
+                        );
+                    })}
                 </div>
                 <div className={styles.right}>
-                    <img src="/2.png" alt="Period Kit" className={styles.image} />
+                    <Image src="/2.png" alt="Period Kit" width={400} height={400} className={styles.image} />
                 </div>
             </div>
         </div>
-    )
+    );
 }
