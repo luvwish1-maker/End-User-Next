@@ -6,45 +6,46 @@ import Image from "next/image";
 import styles from "./header.module.css";
 import { BsHeart, BsPerson, BsBag, BsGift, BsList } from "react-icons/bs";
 import { useAlert } from "../alert/alertProvider";
+import LoginModal from "@/app/login/loginModal";
 
 export default function Header() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
+    const [showLoginModal, setShowLoginModal] = useState(false);
     const { showAlert } = useAlert();
 
-    // Detect screen size
     useEffect(() => {
         const handleResize = () => setIsMobile(window.innerWidth <= 992);
-        handleResize(); // initial check
+        handleResize();
         window.addEventListener("resize", handleResize);
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
-    const handleLogin = () => {
-        setIsLoggedIn(!isLoggedIn);
+    // ✅ Called after successful login in modal
+    const handleLoginSuccess = () => {
+        setIsLoggedIn(true);
+        setShowLoginModal(false);
+        showAlert({
+            message: "Successfully logged in!",
+            type: "success",
+            autoDismiss: true,
+            duration: 3000,
+        });
+    };
 
-        // 👇 Show alert when user clicks login or logout
-        if (!isLoggedIn) {
-            showAlert({
-                message: "Successfully logged in!",
-                type: "success",
-                autoDismiss: true,
-                duration: 3000,
-            });
-        } else {
-            showAlert({
-                message: "You have logged out.",
-                type: "info",
-                autoDismiss: true,
-                duration: 3000,
-            });
-        }
+    const handleLogout = () => {
+        setIsLoggedIn(false);
+        showAlert({
+            message: "You have logged out.",
+            type: "info",
+            autoDismiss: true,
+            duration: 3000,
+        });
     };
 
     return (
         <header className={styles.mainHeader}>
-            {/* Top label bar */}
             <div className={styles.label}>
                 <p>
                     <span><BsGift /></span>
@@ -53,10 +54,8 @@ export default function Header() {
                 </p>
             </div>
 
-            {/* Navbar */}
             <nav className={styles.navbar}>
                 <div className={styles.navContainer}>
-                    {/* Logo */}
                     <Link href="/" className={styles.brand}>
                         <Image
                             src="/logo.png"
@@ -67,9 +66,7 @@ export default function Header() {
                         />
                     </Link>
 
-                    {/* Nav Links & User icons (center on desktop, dropdown on mobile) */}
                     <div className={`${styles.navLinks} ${menuOpen ? styles.showMenu : ""}`}>
-                        {/* Nav Links */}
                         <ul>
                             <li><Link href="/" className={styles.navLink}>Home</Link></li>
                             <li><Link href="/products" className={styles.navLink}>Products</Link></li>
@@ -77,7 +74,6 @@ export default function Header() {
                             <li><Link href="/about" className={styles.navLink}>About Us</Link></li>
                         </ul>
 
-                        {/* Mobile user icons - only show on mobile & logged in */}
                         {isLoggedIn && isMobile && (
                             <ul className={styles.mobileUserIcons}>
                                 <li><BsHeart /></li>
@@ -87,11 +83,10 @@ export default function Header() {
                         )}
                     </div>
 
-                    {/* Right section - desktop only */}
                     {!isMobile && (
                         <div className={styles.userSection}>
                             {!isLoggedIn ? (
-                                <button onClick={handleLogin} className={styles.loginBtn}>
+                                <button onClick={() => setShowLoginModal(true)} className={styles.loginBtn}>
                                     Login
                                 </button>
                             ) : (
@@ -99,16 +94,16 @@ export default function Header() {
                                     <li><BsHeart /></li>
                                     <li><BsPerson /></li>
                                     <li><BsBag /></li>
+                                    <li><button onClick={handleLogout} className={styles.logoutBtn}>Logout</button></li>
                                 </ul>
                             )}
                         </div>
                     )}
 
-                    {/* Mobile actions (menu + login) */}
                     {isMobile && (
                         <div className={styles.mobileActions}>
                             {!isLoggedIn && (
-                                <button onClick={handleLogin} className={styles.loginBtn}>
+                                <button onClick={() => setShowLoginModal(true)} className={styles.loginBtn}>
                                     Login
                                 </button>
                             )}
@@ -122,6 +117,14 @@ export default function Header() {
                     )}
                 </div>
             </nav>
+
+            {/* ✅ Login Modal */}
+            {showLoginModal && (
+                <LoginModal
+                    onClose={() => setShowLoginModal(false)}
+                    onLoginSuccess={handleLoginSuccess}
+                />
+            )}
         </header>
     );
 }
