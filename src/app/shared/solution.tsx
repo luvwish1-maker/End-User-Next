@@ -52,7 +52,13 @@ export default function Solution() {
                     })}
                 </div>
                 <div className={styles.right}>
-                    <Image src="/2.png" alt="Period Kit" width={400} height={400} className={styles.image} />
+                    <Image
+                        src="/2.png"
+                        alt="Period Kit"
+                        width={772}
+                        height={515}
+                        className={styles.image}
+                    />
                 </div>
             </div>
         </div>

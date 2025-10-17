@@ -3,7 +3,7 @@
     flex-direction: column;
     gap: 2rem;
     font-family: 'Poppins', sans-serif;
-    padding: 2rem;
+    padding: 2rem 7rem;
 }
 
 .top {
@@ -14,7 +14,8 @@
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    background-color: #ffe4ef;
+    background: linear-gradient(90deg, #FFF0F7 0%, #FDF2F8 100%);
+    border: 2px solid #FFCCE0;
     padding: 0.5rem 1rem;
     border-radius: 50px;
     font-weight: 500;
@@ -66,6 +67,10 @@
     border: 2px solid #FFE5EF;
     color: #000;
     background-color: transparent;
+    width: 489px;
+    /* precise width */
+    height: 81px;
+    /* precise height */
 }
 
 .cardIcon {
@@ -76,6 +81,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    min-width: 50px;
+    min-height: 50px;
 }
 
 .cardText {
@@ -87,6 +94,7 @@
     font-weight: 600;
     margin: 0;
     color: #0F0F12;
+    font-size: 16px;
 }
 
 .cardDesc {
@@ -103,6 +111,9 @@
 }
 
 .image {
-    max-width: 100%;
+    width: 772px;
+    /* precise width */
+    height: 515px;
+    /* precise height */
     border-radius: 12px;
 }
