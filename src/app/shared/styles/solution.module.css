@@ -67,10 +67,9 @@
     border: 2px solid #FFE5EF;
     color: #000;
     background-color: transparent;
-    width: 489px;
-    /* precise width */
+    width: 100%;
+    max-width: 489px;
     height: 81px;
-    /* precise height */
 }
 
 .cardIcon {
@@ -112,8 +111,104 @@
 
 .image {
     width: 772px;
-    /* precise width */
     height: 515px;
-    /* precise height */
     border-radius: 12px;
+}
+
+/* ------------------- Responsive ------------------- */
+@media (max-width: 1200px) {
+    .container {
+        padding: 2rem 3rem;
+    }
+
+    .heading {
+        font-size: 40px;
+    }
+
+    .subtext {
+        font-size: 16px;
+        line-height: 26px;
+        max-width: 100%;
+    }
+
+    .bottom {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .left {
+        align-items: center;
+    }
+
+    .card {
+        max-width: 400px;
+        height: 80px;
+    }
+
+    .image {
+        max-width: 600px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 1.5rem 1.5rem;
+    }
+
+    .heading {
+        font-size: 32px;
+    }
+
+    .subtext {
+        font-size: 15px;
+        line-height: 24px;
+        text-align: center;
+    }
+
+    .card {
+        max-width: 100%;
+        height: auto;
+        flex-direction: row;
+        padding: 0.8rem;
+    }
+
+    .cardText {
+        text-align: left;
+    }
+
+    .image {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .bottom {
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .heading {
+        font-size: 24px;
+    }
+
+    .badge {
+        padding: 0.4rem 0.8rem;
+        font-size: 14px;
+    }
+
+    .card {
+        flex-direction: column;
+        align-items: flex-start;
+        height: auto;
+        padding: 0.6rem;
+    }
+
+    .cardIcon {
+        margin-bottom: 0.5rem;
+    }
+
+    .subtext {
+        font-size: 14px;
+        line-height: 22px;
+    }
 }
