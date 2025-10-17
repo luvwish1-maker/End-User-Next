@@ -37,11 +37,9 @@ export default function LoginModal({ onClose }: LoginModalProps) {
         try {
             await new Promise((resolve) => setTimeout(resolve, 1500));
 
-            alert("Logged in successfully!");
             onClose();
         } catch (err) {
             console.log(err);
-            alert("Login failed. Please try again.");
         } finally {
             setLoading(false);
         }
