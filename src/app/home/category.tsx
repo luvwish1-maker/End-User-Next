@@ -1,8 +1,13 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
-import { BsStars, BsDroplet, BsArrowRight } from "react-icons/bs";
+import {
+    BsStars,
+    BsDroplet,
+    BsBoxFill,
+    BsFire,
+    BsRepeat,
+    BsArrowRight,
+} from "react-icons/bs";
 import styles from "./styles/category.module.css";
 
 const categories = [
@@ -11,24 +16,32 @@ const categories = [
         title: "Sanitary Pads",
         description: "Ultra-soft, dermatologist-tested",
         img: "/c1.png",
+        icon: <BsDroplet />,
+        color: "#9C2CA4",
     },
     {
         id: 2,
         title: "Relief Patch",
-        description: "Ultra-soft, dermatologist-tested",
+        description: "Instant comfort and care",
         img: "/c2.png",
+        icon: <BsBoxFill />,
+        color: "#004C35",
     },
     {
         id: 3,
-        title: "Menstrual kit",
-        description: "Ultra-soft, dermatologist-tested",
+        title: "Menstrual Kit",
+        description: "Complete comfort essentials",
         img: "/c3.png",
+        icon: <BsFire />,
+        color: "#E33756",
     },
     {
         id: 4,
         title: "Combo Packs",
-        description: "Ultra-soft, dermatologist-tested",
+        description: "All-in-one savings bundle",
         img: "/c4.png",
+        icon: <BsRepeat />,
+        color: "#C65BF7",
     },
 ];
 
@@ -59,7 +72,12 @@ export default function Category() {
                                 style={{ objectFit: "cover" }}
                                 sizes="(max-width: 768px) 100vw, 250px"
                             />
-                            <BsDroplet className={styles.icon} />
+                            <div
+                                className={styles.iconWrapper}
+                                style={{ backgroundColor: item.color }}
+                            >
+                                {item.icon}
+                            </div>
                         </div>
 
                         <div className={styles.cont}>
