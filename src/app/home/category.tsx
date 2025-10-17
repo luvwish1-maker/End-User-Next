@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { BsStars, BsDroplet, BsArrowRight } from "react-icons/bs";
@@ -55,7 +57,7 @@ export default function Category() {
                                 alt={item.title}
                                 fill
                                 style={{ objectFit: "cover" }}
-                                sizes="(max-width: 768px) 100vw, 300px"
+                                sizes="(max-width: 768px) 100vw, 250px"
                             />
                             <BsDroplet className={styles.icon} />
                         </div>
