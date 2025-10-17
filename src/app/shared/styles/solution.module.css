@@ -165,24 +165,30 @@
         text-align: center;
     }
 
+    .bottom {
+        gap: 1.5rem;
+        flex-direction: column;
+        align-items: center;
+    }
+
     .card {
         max-width: 100%;
         height: auto;
-        flex-direction: row;
-        padding: 0.8rem;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 1rem;
     }
 
     .cardText {
-        text-align: left;
+        text-align: center;
+        align-items: center;
     }
 
     .image {
         max-width: 100%;
         height: auto;
-    }
-
-    .bottom {
-        gap: 1.5rem;
     }
 }
 
@@ -198,13 +204,20 @@
 
     .card {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
         height: auto;
-        padding: 0.6rem;
+        padding: 0.8rem;
     }
 
     .cardIcon {
         margin-bottom: 0.5rem;
+    }
+
+    .cardText {
+        align-items: center;
+        text-align: center;
     }
 
     .subtext {
