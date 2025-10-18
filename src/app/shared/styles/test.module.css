@@ -214,26 +214,19 @@
 
 .quoteOverlay {
     position: absolute;
-    top: 20%;
-    right: -10px;
-    transform: translateY(-50%);
-    font-size: 180px;
+    top: 5px;
+    right: 10px;
+    font-size: 140px;
     font-weight: 900;
     line-height: 1;
-    color: #C61469;
-    opacity: 0.9;
+    color: rgba(198, 20, 105, 0.12);
     z-index: 1;
     pointer-events: none;
-    background: none;
-    -webkit-background-clip: unset;
-    background-clip: unset;
-    color: #C61469;
-    text-shadow: none;
-    content: "&rdquo;";
-    opacity: 0.4;
-    color: #C61469;
-    font-size: 180px;
+    user-select: none;
+    font-family: serif;
+    transform: rotate(5deg);
 }
+
 
 @media (max-width: 1024px) {
     .cards {
