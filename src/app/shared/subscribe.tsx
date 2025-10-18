@@ -54,8 +54,15 @@ export default function Subscribe() {
                     </div>
 
                     <div className={styles.footerInfo}>
-                        <p>50K+ Subscribers</p>
-                        <p>Weekly Newsletter</p>
+                        <div className="sub">
+                            <h4>50K+</h4>
+                            <p>Subscribers</p>
+                        </div>
+
+                        <div className="sub">
+                            <h4>Weekly</h4>
+                            <p>Newsletter</p>
+                        </div>
                     </div>
                 </div>
             </div>
