@@ -1,5 +1,5 @@
 import styles from "./styles/test.module.css"
-import { BsHeartFill, BsFillStarFill, BsCheck2, BsHandThumbsUp } from "react-icons/bs";
+import { BsHeart, BsFillStarFill, BsCheck2, BsHandThumbsUp } from "react-icons/bs";
 import Image from "next/image";
 
 export default function Solution() {
@@ -46,7 +46,7 @@ export default function Solution() {
             <div className={styles.container}>
                 <div className={styles.badge}>
                     <p>
-                        <BsHeartFill className={styles.heartIcon} /> Customer Love
+                        <BsHeart className={styles.heartIcon} /> Customer Love
                     </p>
                 </div>
 

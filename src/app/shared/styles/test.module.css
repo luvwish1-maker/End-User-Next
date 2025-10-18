@@ -15,17 +15,17 @@
     display: inline-flex;
     align-items: center;
     padding: 8px 15px;
-    border: 1px solid #e7e7e7;
     border-radius: 50px;
     background-color: #ffffff;
-    color: #444444;
+    color: #800D45;
     font-size: 14px;
     font-weight: 500;
     margin-bottom: 30px;
+    box-shadow: 0px 1px 2px -1px #0000001A, 0px 1px 3px 0px #0000001A;
 }
 
 .heartIcon {
-    color: #f72585;
+    color: #800D45;
     margin-right: 8px;
     font-size: 16px;
 }
@@ -60,12 +60,16 @@
 .card {
     position: relative;
     flex: 1;
-    max-width: 380px;
+    max-width: 372.156px;
+    height: 298.319px;
     padding: 30px;
     background-color: #ffffff;
-    border-radius: 12px;
-    border-top: 5px solid #ff4d99;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    border-radius: 24px;
+    border-width: 0.61px;
+    border-style: solid;
+    border-color: transparent;
+    border-top: 0.61px solid #FFE5EF80;
+    box-shadow: 0px 2px 8px 0px #C6146914;
     transition: transform 0.3s, box-shadow 0.3s;
     text-align: left;
     overflow: hidden;
@@ -81,16 +85,20 @@
 }
 
 .starIcon {
-    color: #ffb800;
+    color: #A31157;
     font-size: 16px;
     margin-right: 2px;
 }
 
 .quote {
-    font-size: 18px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 14px;
+    line-height: 22.75px;
+    letter-spacing: 0px;
     color: #444444;
-    line-height: 1.6;
-    margin: 0 0 20px 0;
+    margin: 0 0 5px 0;
     min-height: 100px;
 }
 
@@ -106,21 +114,13 @@
     display: inline-block;
     padding: 5px 10px;
     border-radius: 4px;
-    font-size: 13px;
-    font-weight: 600;
-    color: #f72585;
-    background-color: #ffe6f0;
-    white-space: nowrap;
-}
-
-.sizeTag {
-    display: inline-block;
-    padding: 5px 10px;
-    border-radius: 4px;
-    font-size: 13px;
-    font-weight: 600;
-    color: #4a4a4a;
-    background-color: #f0f0f0;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 12px;
+    line-height: 16px;
+    color: #800D45;
+    background: linear-gradient(90deg, #FFF0F7 0%, #FDF2F8 100%);
     white-space: nowrap;
 }
 
@@ -141,7 +141,7 @@
     height: 40px;
     border-radius: 50%;
     overflow: hidden;
-    border: 2px solid #ff4d99;
+    border: 2px solid #800D45;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
@@ -165,7 +165,7 @@
 }
 
 .checkIcon {
-    color: #38b000;
+    color: #A31157;
     font-size: 16px;
     margin-left: 5px;
 }
@@ -186,16 +186,20 @@
     display: flex;
     align-items: center;
     padding: 5px 12px;
-    border: 1px solid #eeeeee;
     border-radius: 50px;
-    font-size: 15px;
-    color: #4a4a4a;
-    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0px;
+    color: #A31157;
+    background-color: #FFF0F7;
     margin: 0;
 }
 
 .thumbIcon {
-    color: #f72585;
+    color: #A31157;
     margin-right: 8px;
     font-size: 16px;
 }
