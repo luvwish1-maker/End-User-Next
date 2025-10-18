@@ -1,7 +1,7 @@
 .sectionContainer {
     padding: 50px 0;
     background-color: #ffffff;
-    font-family: Arial, sans-serif;
+    font-family: 'Inter', sans-serif;
 }
 
 .container {
@@ -55,28 +55,34 @@
     display: flex;
     gap: 30px;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 .card {
     position: relative;
     flex: 1;
-    max-width: 372.156px;
-    height: 298.319px;
+    min-width: 280px;
+    max-width: 372px;
     padding: 30px;
     background-color: #ffffff;
     border-radius: 24px;
     border: 0.61px solid transparent;
-    border-top: 5px solid #C61469; /* visible pinkish top border */
-    box-shadow: 0px 2px 8px 0px #C6146914;
+    border-top: 5px solid #C61469;
+    box-shadow: 0px 2px 8px 0px rgba(198, 20, 105, 0.08);
     transition: transform 0.3s, box-shadow 0.3s;
     text-align: left;
     overflow: hidden;
-    z-index: 0; /* ensures content stays below overlay */
+    z-index: 0;
 }
 
 .card:hover {
     transform: translateY(-5px);
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+}
+
+.card>* {
+    position: relative;
+    z-index: 2;
 }
 
 .stars {
@@ -99,6 +105,8 @@
     color: #444444;
     margin: 0 0 5px 0;
     min-height: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .productTags {
@@ -142,6 +150,7 @@
     overflow: hidden;
     border: 2px solid #800D45;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
 }
 
 .avatarImage {
@@ -205,43 +214,25 @@
 
 .quoteOverlay {
     position: absolute;
-    top: 50%;
-    right: 20px;
+    top: 20%;
+    right: -10px;
     transform: translateY(-50%);
     font-size: 180px;
     font-weight: 900;
-    color: rgba(255, 255, 255, 0.6);
     line-height: 1;
+    color: #C61469;
+    opacity: 0.9;
     z-index: 1;
     pointer-events: none;
-    background: radial-gradient(circle, #fff 0%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0) 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-}
-
-.quoteOverlay {
-    position: absolute;
-    top: 50%;
-    right: 20px;
-    transform: translateY(-50%);
-    font-size: 180px;
-    font-weight: 900;
-    line-height: 1;
-    background: radial-gradient(circle, #fff 0%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0) 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    background: none;
+    -webkit-background-clip: unset;
+    background-clip: unset;
+    color: #C61469;
+    text-shadow: none;
+    content: "&rdquo;";
     opacity: 0.4;
-    z-index: 1;
-    pointer-events: none;
-}
-
-.card * {
-    position: relative;
-    z-index: 2;
+    color: #C61469;
+    font-size: 180px;
 }
 
 @media (max-width: 1024px) {
@@ -253,6 +244,12 @@
     .card {
         max-width: 500px;
         width: 100%;
+        height: auto;
+    }
+
+    .quoteOverlay {
+        font-size: 150px;
+        right: 0px;
     }
 }
 
@@ -261,7 +258,28 @@
         font-size: 36px;
     }
 
+    .subheading {
+        font-size: 16px;
+    }
+
     .quote {
         min-height: auto;
+        font-size: 13px;
+        line-height: 1.5;
+    }
+
+    .badge {
+        font-size: 13px;
+        padding: 6px 12px;
+    }
+
+    .productTags {
+        flex-wrap: wrap;
+    }
+
+    .quoteOverlay {
+        font-size: 120px;
+        right: -10px;
+        top: 10%;
     }
 }
