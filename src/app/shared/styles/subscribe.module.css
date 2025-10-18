@@ -2,9 +2,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 60px 20px;
+    padding: 30px 20px;
     background: #fff;
-    margin-bottom: 2rem;
 }
 
 .container {
@@ -16,7 +15,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 64px;
+    padding: 30px 50px;
     color: #fff;
     font-family: 'Inter', sans-serif;
     flex-wrap: wrap;
@@ -86,7 +85,7 @@
 .privacy {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 12px;
     margin-top: 24px;
     color: #ffffffb2;
 }
@@ -94,13 +93,15 @@
 .privacy svg {
     width: 40px;
     height: 40px;
+    color: #ffffffb2;
     background: none;
     border: none;
-    color: #ffffffb2;
 }
 
 .privacy p {
     font-size: 14px;
+    margin: 0;
+    line-height: 16px;
 }
 
 /* ---------- RIGHT SECTION ---------- */
