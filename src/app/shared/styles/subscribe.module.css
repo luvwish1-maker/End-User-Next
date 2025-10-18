@@ -192,7 +192,7 @@
     opacity: 1;
 }
 
-.footerInfo .sub {
+.sub {
     width: 198px;
     height: 52px;
     display: flex;
@@ -203,7 +203,7 @@
     background: transparent;
 }
 
-.footerInfo .sub h4 {
+.sub h4 {
     font-family: 'Inter', sans-serif;
     font-weight: 400;
     font-size: 24px;
@@ -212,7 +212,7 @@
     text-align: center;
 }
 
-.footerInfo .sub p {
+.sub p {
     font-family: 'Inter', sans-serif;
     font-weight: 400;
     font-size: 12px;

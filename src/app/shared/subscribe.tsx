@@ -54,12 +54,12 @@ export default function Subscribe() {
                     </div>
 
                     <div className={styles.footerInfo}>
-                        <div className="sub">
+                        <div className={styles.sub}>
                             <h4>50K+</h4>
                             <p>Subscribers</p>
                         </div>
 
-                        <div className="sub">
+                        <div className={styles.sub}>
                             <h4>Weekly</h4>
                             <p>Newsletter</p>
                         </div>
