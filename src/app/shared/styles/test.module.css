@@ -1,0 +1,241 @@
+.sectionContainer {
+    padding: 80px 0;
+    background-color: #ffffff;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 15px;
+    border: 1px solid #e7e7e7;
+    border-radius: 50px;
+    background-color: #ffffff;
+    color: #444444;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 30px;
+}
+
+.heartIcon {
+    color: #f72585;
+    margin-right: 8px;
+    font-size: 16px;
+}
+
+.head {
+    margin-bottom: 50px;
+}
+
+.heading {
+    font-size: 44px;
+    font-weight: 700;
+    color: #2e2e2e;
+    margin: 0 0 10px 0;
+}
+
+.highlight {
+    color: #f72585;
+}
+
+.subheading {
+    font-size: 18px;
+    color: #666666;
+    margin: 0;
+}
+
+.cards {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+}
+
+.card {
+    position: relative;
+    flex: 1;
+    max-width: 380px;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    border-top: 5px solid #ff4d99;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-align: left;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+}
+
+.stars {
+    margin-bottom: 15px;
+}
+
+.starIcon {
+    color: #ffb800;
+    font-size: 16px;
+    margin-right: 2px;
+}
+
+.quote {
+    font-size: 18px;
+    color: #444444;
+    line-height: 1.6;
+    margin: 0 0 20px 0;
+    min-height: 100px;
+}
+
+.productTags {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.productTag {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #f72585;
+    background-color: #ffe6f0;
+    white-space: nowrap;
+}
+
+.sizeTag {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #4a4a4a;
+    background-color: #f0f0f0;
+    white-space: nowrap;
+}
+
+.con {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.det {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid #ff4d99;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.avatarImage {
+    object-fit: cover;
+    display: block;
+}
+
+.nameLocation {
+    display: flex;
+    flex-direction: column;
+}
+
+.userName {
+    font-size: 15px;
+    font-weight: 700;
+    color: #2e2e2e;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+.checkIcon {
+    color: #38b000;
+    font-size: 16px;
+    margin-left: 5px;
+}
+
+.location {
+    font-size: 13px;
+    color: #888888;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.likes {
+    display: flex;
+    align-items: center;
+}
+
+.likesText {
+    display: flex;
+    align-items: center;
+    padding: 5px 12px;
+    border: 1px solid #eeeeee;
+    border-radius: 50px;
+    font-size: 15px;
+    color: #4a4a4a;
+    font-weight: 600;
+    margin: 0;
+}
+
+.thumbIcon {
+    color: #f72585;
+    margin-right: 8px;
+    font-size: 16px;
+}
+
+.quoteOverlay {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    font-size: 180px;
+    font-weight: 900;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1;
+    z-index: 1;
+    pointer-events: none;
+    background: radial-gradient(circle, #fff 0%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+@media (max-width: 1024px) {
+    .cards {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card {
+        max-width: 500px;
+        width: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+    .heading {
+        font-size: 36px;
+    }
+
+    .quote {
+        min-height: auto;
+    }
+}
