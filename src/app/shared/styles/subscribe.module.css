@@ -80,13 +80,17 @@
     color: #ffffff;
 }
 
-.left .privacy {
+ .privacy {
     display: flex;
     align-items: center;
     gap: 8px;
     margin-top: 24px;
-    font-size: 14px;
+    font-size: 4px;
     color: #ffffffb2;
+}
+
+.privacy p{
+    font-size: 14px;
 }
 
 /* ---------- RIGHT SECTION ---------- */
@@ -103,7 +107,7 @@
 }
 
 .badge {
-    align-self: flex-start;
+    align-self: center;
     background: #ffffff33;
     border-radius: 50px;
     padding: 8px 20px;
@@ -116,6 +120,7 @@
 
 .head {
     margin-top: 32px;
+    text-align: center;
 }
 
 .head h4 {
