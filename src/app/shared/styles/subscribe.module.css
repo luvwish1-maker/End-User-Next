@@ -1,0 +1,122 @@
+.container {
+    background: linear-gradient(180deg, #C61469 0%, #A31157 50%, #5A0E36 100%);
+    box-shadow: 0px 8px 24px 0px #C6146929;
+    width: 1164px;
+    height: 695px;
+    border-radius: 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 64px;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+}
+
+/* ---------- LEFT SECTION ---------- */
+.left {
+    width: 494px;
+    height: 567px;
+}
+
+.left svg {
+    width: 64px;
+    height: 64px;
+    background: #ffffff33;
+    border-top: 0.61px solid #ffffff4d;
+    border-radius: 16px;
+    padding: 12px;
+}
+
+.left h3 {
+    margin-top: 24px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 48px;
+    line-height: 48px;
+    color: #ffffff;
+}
+
+.left p {
+    font-size: 18px;
+    line-height: 29.25px;
+    color: #ffffffe5;
+    margin-top: 16px;
+}
+
+.points {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.point {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.point svg {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    background: #ffffff33;
+    border-top: 0.61px solid #ffffff4d;
+    padding: 8px;
+}
+
+.point p {
+    font-size: 16px;
+    line-height: 24px;
+    color: #ffffff;
+}
+
+.left .privacy {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 24px;
+    font-size: 14px;
+    color: #ffffffb2;
+}
+
+/* ---------- RIGHT SECTION ---------- */
+.right {
+    width: 494px;
+    height: 567px;
+    border-radius: 32px;
+    background: #ffffff1a;
+    border-top: 0.61px solid #ffffff33;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.badge {
+    align-self: flex-start;
+    background: #ffffff33;
+    border-radius: 50px;
+    padding: 8px 20px;
+    font-size: 14px;
+    border-top: 0.61px solid #ffffff4d;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.head {
+    margin-top: 32px;
+}
+
+.head h4 {
+    font-size: 28px;
+    font-family: 'Poppins', sans-serif;
+    color: #ffffff;
+    margin-bottom: 8px;
+}
+
+.head p {
+    font-size: 16px;
+    color: #ffffffcc;
+}
