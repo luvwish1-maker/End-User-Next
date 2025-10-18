@@ -92,10 +92,11 @@
 }
 
 .privacy svg {
-    width: 14px;
-    height: 14px;
+    width: 40px;
+    height: 40px;
     background: none;
     border: none;
+    color: #ffffffb2;
 }
 
 .privacy p {
