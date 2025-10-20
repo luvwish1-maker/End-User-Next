@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Slider from "react-slick";
+import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import styles from "./styles/products.module.css";
@@ -15,6 +16,7 @@ export default function Products() {
     const [error, setError] = useState<string | null>(null);
     const [page, setPage] = useState(1);
     const limit = 10;
+    let sliderRef: Slider | null = null;
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -47,35 +49,68 @@ export default function Products() {
     if (error) return <p>Error: {error}</p>;
 
     return (
-        <div className={styles.carouselContainer}>
-            {products.length === 0 ? (
-                <p>No products found.</p>
-            ) : (
-                <Slider {...settings}>
-                    {products.map((product) => {
-                        const mainImage = product.images.find(img => img.isMain);
-                        return (
-                            <div key={product.id} className={styles.productCard}>
-                                <div className={styles.imageWrapper}>
-                                    {mainImage && (
-                                        <Image
-                                            src={mainImage.url}
-                                            alt={mainImage.altText || product.name}
-                                            width={300}
-                                            height={300}
-                                            className={styles.productImage}
-                                        />
-                                    )}
+        <div className={styles.carouselWrapper}>
+            <div className={styles.topButtons}>
+                <button
+                    className={styles.iconButton}
+                    onClick={() => sliderRef?.slickPrev()}
+                >
+                    <BsArrowLeft />
+                </button>
+                <button
+                    className={styles.iconButton}
+                    onClick={() => sliderRef?.slickNext()}
+                >
+                    <BsArrowRight />
+                </button>
+            </div>
+
+            <div className={styles.carouselContainer}>
+                {products.length === 0 ? (
+                    <p>No products found.</p>
+                ) : (
+                    <Slider ref={(slider) => (sliderRef = slider)} {...settings}>
+                        {products.map((product) => {
+                            const mainImage = product.images.find((img) => img.isMain);
+                            const discountPercent =
+                                ((Number(product.actualPrice) - Number(product.discountedPrice)) /
+                                    Number(product.actualPrice)) *
+                                100;
+
+                            return (
+                                <div key={product.id} className={styles.productCard}>
+                                    <div className={styles.imageWrapper}>
+                                        {mainImage && (
+                                            <Image
+                                                src={mainImage.url}
+                                                alt={mainImage.altText || product.name}
+                                                width={331}
+                                                height={416}
+                                                className={styles.productImage}
+                                            />
+                                        )}
+                                    </div>
+
+                                    <p className={styles.productCategory}>{product.categoryName}</p>
+                                    <h3 className={styles.productName}>{product.name}</h3>
+
+                                    <div className={styles.priceRow}>
+                                        <span className={styles.discountedPrice}>
+                                            ${Number(product.discountedPrice).toFixed(2)}
+                                        </span>
+                                        <span className={styles.actualPrice}>
+                                            ${Number(product.actualPrice).toFixed(2)}
+                                        </span>
+                                        <span className={styles.discountTag}>
+                                            -{Math.round(discountPercent)}%
+                                        </span>
+                                    </div>
                                 </div>
-                                <h3 className={styles.productName}>{product.name}</h3>
-                                <p className={styles.productPrice}>
-                                    ${Number(product.discountedPrice).toFixed(2)}
-                                </p>
-                            </div>
-                        );
-                    })}
-                </Slider>
-            )}
+                            );
+                        })}
+                    </Slider>
+                )}
+            </div>
         </div>
     );
 }
