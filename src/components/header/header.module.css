@@ -108,9 +108,10 @@
     color: #1F1F1F;
 }
 
-.userIcons li {
+.userIcons li,
+.mobileUserIcons li {
     background-color: #FFE4EF;
-    border-radius: 20px;
+    border-radius: 50%;
     width: 36px;
     height: 36px;
     display: flex;
@@ -118,11 +119,48 @@
     justify-content: center;
     transition: all 0.3s ease;
     cursor: pointer;
+    color: #1F1F1F;
 }
 
-.userIcons li:hover {
+.userIcons li:hover,
+.mobileUserIcons li:hover {
     background-color: #A51058;
     color: white;
+}
+
+.userIcons li button,
+.mobileUserIcons li button {
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    margin: 0;
+    border: none;
+    border-radius: 50%;
+    background-color: #FFE4EF;
+    color: #1F1F1F;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.userIcons li button:hover,
+.mobileUserIcons li button:hover {
+    background-color: #A51058;
+    color: white;
+}
+
+.userIcons li button svg,
+.mobileUserIcons li button svg {
+    width: 16px;
+    height: 16px;
+}
+
+@media (max-width: 992px) {
+    .mobileUserIcons {
+        gap: 10px;
+    }
 }
 
 /* ---------- Login Button ---------- */
@@ -200,34 +238,6 @@
         padding: 6px 15px;
     }
 
-    .mobileUserIcons {
-        display: flex !important;
-        flex-direction: row !important;
-        justify-content: center;
-        align-items: center;
-        gap: 15px;
-        width: 100%;
-        padding: 10px 0;
-        background-color: #fff;
-    }
-
-    .mobileUserIcons li {
-        background-color: #FFE4EF;
-        border-radius: 20px;
-        width: 36px;
-        height: 36px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.3s ease;
-        cursor: pointer;
-        color: #1F1F1F;
-    }
-
-    .mobileUserIcons li:hover {
-        background-color: #A51058;
-        color: white;
-    }
 }
 
 @media (max-width: 576px) {

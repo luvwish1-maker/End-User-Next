@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./header.module.css";
-import { BsHeart, BsPerson, BsBag, BsGift, BsList } from "react-icons/bs";
+import { BsHeart, BsPerson, BsBag, BsGift, BsList, BsPower  } from "react-icons/bs";
 import { useAlert } from "../alert/alertProvider";
 import LoginModal from "@/app/login/loginModal";
 import { authService } from "@/app/services/authService";
@@ -120,12 +120,9 @@ export default function Header() {
                                 <li><BsHeart /></li>
                                 <li><BsPerson /></li>
                                 <li><BsBag /></li>
-                                <li>
-                                    <button
-                                        onClick={handleLogout}
-                                        className={styles.loginBtn} // ✅ use new logoutBtn class
-                                    >
-                                        Logout
+                                <li title="Logout">
+                                    <button onClick={handleLogout}>
+                                        <BsPower />
                                     </button>
                                 </li>
 
@@ -148,12 +145,9 @@ export default function Header() {
                                     <li title="Wishlist"><BsHeart /></li>
                                     <li title="Profile"><BsPerson /></li>
                                     <li title="Cart"><BsBag /></li>
-                                    <li>
-                                        <button
-                                            onClick={handleLogout}
-                                            className={styles.loginBtn}
-                                        >
-                                            Logout
+                                    <li title="Logout">
+                                        <button onClick={handleLogout}>
+                                            <BsPower />
                                         </button>
                                     </li>
                                 </ul>
