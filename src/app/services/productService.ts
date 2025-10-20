@@ -2,9 +2,24 @@
 import api from '../lib/axios';
 import { CartItem, GetProductsParams, OrderItem, Product, WishlistItem } from '../types/types';
 
+interface ProductsResponse {
+    success: boolean;
+    data: {
+        data: Product[];
+        meta: {
+            page: number;
+            limit: number;
+            total: number;
+            totalPages: number;
+            hasNext: boolean;
+            hasPrev: boolean;
+        };
+    };
+}
+
 const ProductsService = {
     // Products
-    getProducts: (params?: GetProductsParams) => api.get<Product[]>('/products', { params }),
+    getProducts: (params?: GetProductsParams) => api.get<ProductsResponse>('/products', { params }),
     getProductByID: (id: string) => api.get<Product>(`/products/${id}`),
 
     // Cart

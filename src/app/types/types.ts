@@ -1,9 +1,25 @@
-// types.ts
+export interface ProductImage {
+    id: string;
+    productId: string;
+    url: string;
+    altText: string;
+    isMain: boolean;
+    sortOrder: number;
+}
+
 export interface Product {
     id: string;
     name: string;
-    price: number;
-    description?: string;
+    categoryName: string;
+    discountedPrice: number;
+    actualPrice: number;
+    description: string;
+    stockCount: number;
+    isStock: boolean;
+    createdAt: string;
+    updatedAt: string;
+    images: ProductImage[];
+    is_wishlisted: boolean;
 }
 
 export interface CartItem {

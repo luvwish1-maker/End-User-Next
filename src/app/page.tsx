@@ -5,6 +5,7 @@ import Solution from "./shared/solution";
 import Subscribe from "./shared/subscribe";
 import Test from "./shared/test";
 import styles from "./page.module.css"
+import Products from "./shared/products";
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
         <h3>Painful Periods? <span>We got you</span></h3>
         <p>Cramps. Mood swings. Leaks. Still expected to perform ? You deserve better support.</p>
       </div>
+      <Products />
 
       <Solution />
       <Counts />
