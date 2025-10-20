@@ -10,19 +10,11 @@ import LoginModal from "@/app/login/loginModal";
 import { authService } from "@/app/services/authService";
 import { useConfirmation } from "../confirmation/useConfirmation";
 
-interface User {
-    id: string;
-    name: string;
-    email: string;
-    role: string;
-}
-
 export default function Header() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
     const [showLoginModal, setShowLoginModal] = useState(false);
-    const [user, setUser] = useState<User | null>(null);
     const { showAlert } = useAlert();
     const { confirm, ConfirmationElement } = useConfirmation();
 
@@ -37,7 +29,6 @@ export default function Header() {
         if (confirmed) {
             authService.logout();
             setIsLoggedIn(false);
-            setUser(null);
             showAlert({
                 message: "You have logged out.",
                 type: "info",
@@ -62,14 +53,11 @@ export default function Header() {
 
         if (loggedIn && storedUser) {
             setIsLoggedIn(true);
-            setUser(storedUser);
         }
     }, []);
 
     // ✅ On successful login
     const handleLoginSuccess = () => {
-        const storedUser = authService.getUser();
-        setUser(storedUser);
         setIsLoggedIn(true);
         setShowLoginModal(false);
         showAlert({
