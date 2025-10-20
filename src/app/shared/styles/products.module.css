@@ -1,7 +1,6 @@
 .carouselWrapper {
     margin: 0 1rem;
     position: relative;
-    padding: 20px 0;
 }
 
 .topButtons {
@@ -32,6 +31,14 @@
 
 .carouselContainer {
     width: 100%;
+}
+
+.carouselContainer :global(.slick-slide) {
+    padding: 0 10px;
+}
+
+.carouselContainer :global(.slick-list) {
+    margin: 0 -10px;
 }
 
 .productCard {
