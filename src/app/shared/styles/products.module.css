@@ -1,6 +1,7 @@
 .carouselWrapper {
     margin: 0 1rem;
     position: relative;
+    padding: 20px 0;
 }
 
 .topButtons {
@@ -16,7 +17,7 @@
     border-radius: 50%;
     background: #fff8fb;
     color: #d27b9e;
-    border: 1.5px solid #ffCCE0;
+    border: 1.5px solid #ffcce0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -42,12 +43,13 @@
 }
 
 .productCard {
-    width: 270px;
-    height: 480px;
+    width: 100%;
+    max-width: 270px;
+    height: auto;
     text-align: center;
     background: #fff;
     border-radius: 10px;
-    border: 1px solid #0000001A;
+    border: 1px solid #0000001a;
     padding-bottom: 15px;
     margin: 0 auto;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -60,10 +62,10 @@
 
 .imageWrapper {
     width: 100%;
-    height: 340px;
+    aspect-ratio: 4 / 5;
     overflow: hidden;
     border-radius: 10px;
-    border: 1px solid #0000001A;
+    border: 1px solid #0000001a;
 }
 
 .productImage {
@@ -91,11 +93,12 @@
     font-size: 17px;
     color: #333;
     margin: 5px 0;
-    height: 48px;
+    min-height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0 10px;
+    text-align: center;
 }
 
 .priceRow {
@@ -125,23 +128,35 @@
     font-family: "Poppins", sans-serif;
     font-weight: 600;
     font-size: 13px;
-    color: #5CBD57;
+    color: #5cbd57;
 }
 
-/* ---------- Responsive ---------- */
+/* ---------- RESPONSIVE STYLES ---------- */
+
+/* Medium screens - Tablets */
 @media (max-width: 1024px) {
     .productCard {
-        width: 250px;
-        height: 440px;
+        max-width: 240px;
     }
+
+    .productName {
+        font-size: 16px;
+    }
+
+    .discountedPrice {
+        font-size: 17px;
+    }
+
     .imageWrapper {
-        height: 300px;
+        aspect-ratio: 4 / 5;
     }
 }
 
-@media (max-width: 700px) {
+/* Small screens - Phones */
+@media (max-width: 768px) {
     .carouselWrapper {
-        padding: 10px;
+        margin: 0;
+        padding: 15px;
     }
 
     .topButtons {
@@ -149,12 +164,57 @@
         margin-bottom: 10px;
     }
 
-    .productCard {
-        width: 90%;
-        height: auto;
+    .iconButton {
+        width: 35px;
+        height: 35px;
+        font-size: 18px;
     }
 
-    .imageWrapper {
-        height: 300px;
+    .carouselContainer :global(.slick-slide) {
+        padding: 0 6px;
+    }
+
+    .carouselContainer :global(.slick-list) {
+        margin: 0 -6px;
+    }
+
+    .productCard {
+        max-width: 90%;
+    }
+
+    .productName {
+        font-size: 15px;
+    }
+
+    .discountedPrice {
+        font-size: 16px;
+    }
+}
+
+/* Very small devices - narrow phones */
+@media (max-width: 480px) {
+    .productCard {
+        max-width: 100%;
+        margin: 0 auto;
+    }
+
+    .productName {
+        font-size: 14px;
+    }
+
+    .productCategory {
+        font-size: 13px;
+    }
+
+    .discountedPrice {
+        font-size: 15px;
+    }
+
+    .actualPrice {
+        font-size: 13px;
+    }
+
+    .discountTag {
+        font-size: 12px;
     }
 }
