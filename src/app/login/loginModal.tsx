@@ -4,17 +4,25 @@ import { useState } from "react";
 import Image from "next/image";
 import { FaEnvelope, FaLock } from "react-icons/fa";
 import styles from "./login.module.css";
+import { authService } from "../services/authService";
+import { AxiosError } from "axios";
 
 interface LoginModalProps {
     onClose: () => void;
     onLoginSuccess: () => void;
 }
 
-export default function LoginModal({ onClose }: LoginModalProps) {
+interface ApiErrorResponse {
+    message?: string;
+    error?: string;
+    statusCode?: number;
+}
+
+export default function LoginModal({ onClose, onLoginSuccess }: LoginModalProps) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState<{ email?: string; password?: string }>({});
+    const [error, setError] = useState<{ email?: string; password?: string; general?: string }>({});
 
     const validateForm = () => {
         const newErrors: { email?: string; password?: string } = {};
@@ -22,8 +30,7 @@ export default function LoginModal({ onClose }: LoginModalProps) {
         else if (!/\S+@\S+\.\S+/.test(email)) newErrors.email = "Enter a valid email";
 
         if (!password) newErrors.password = "Password is required";
-        else if (password.length < 6)
-            newErrors.password = "Minimum 6 characters required";
+        else if (password.length < 6) newErrors.password = "Minimum 6 characters required";
 
         setError(newErrors);
         return Object.keys(newErrors).length === 0;
@@ -33,13 +40,28 @@ export default function LoginModal({ onClose }: LoginModalProps) {
         e.preventDefault();
         if (!validateForm()) return;
         setLoading(true);
+        setError({});
 
         try {
-            await new Promise((resolve) => setTimeout(resolve, 1500));
-
-            onClose();
+            await authService.login(email, password);
+            onLoginSuccess();
         } catch (err) {
-            console.log(err);
+            const axiosError = err as AxiosError<ApiErrorResponse>;
+            const status = axiosError.response?.status;
+            const message = axiosError.response?.data?.message;
+
+            if (status === 401) {
+                try {
+                    await authService.signup({ email, password });
+                    await authService.login(email, password);
+                    onLoginSuccess();
+                } catch (signupErr) {
+                    const signupError = signupErr as AxiosError<ApiErrorResponse>;
+                    setError({ general: signupError.response?.data?.message || "Signup failed" });
+                }
+            } else {
+                setError({ general: message || "Login failed" });
+            }
         } finally {
             setLoading(false);
         }
@@ -117,21 +139,15 @@ export default function LoginModal({ onClose }: LoginModalProps) {
                                 onChange={(e) => setPassword(e.target.value)}
                             />
                         </div>
-                        {error.password && (
-                            <small className={styles.error}>{error.password}</small>
-                        )}
+                        {error.password && <small className={styles.error}>{error.password}</small>}
                     </div>
 
-                    <button
-                        type="submit"
-                        className={styles.submitBtn}
-                        disabled={loading}
-                    >
-                        {loading ? (
-                            <div className={styles.spinner}></div>
-                        ) : (
-                            "Login / Signup"
-                        )}
+                    {error.general && (
+                        <div className={styles.errorBox}>{error.general}</div>
+                    )}
+
+                    <button type="submit" className={styles.submitBtn} disabled={loading}>
+                        {loading ? <div className={styles.spinner}></div> : "Login / Signup"}
                     </button>
                 </form>
             </div>

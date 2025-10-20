@@ -7,14 +7,24 @@ import styles from "./header.module.css";
 import { BsHeart, BsPerson, BsBag, BsGift, BsList } from "react-icons/bs";
 import { useAlert } from "../alert/alertProvider";
 import LoginModal from "@/app/login/loginModal";
+import { authService } from "@/app/services/authService";
+
+interface User {
+    id: string;
+    name: string;
+    email: string;
+    role: string;
+}
 
 export default function Header() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
     const [showLoginModal, setShowLoginModal] = useState(false);
+    const [user, setUser] = useState<User | null>(null);
     const { showAlert } = useAlert();
 
+    // ✅ Detect screen size
     useEffect(() => {
         const handleResize = () => setIsMobile(window.innerWidth <= 992);
         handleResize();
@@ -22,8 +32,21 @@ export default function Header() {
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
-    // ✅ Called after successful login in modal
+    // ✅ Load login state from localStorage
+    useEffect(() => {
+        const storedUser = authService.getUser();
+        const loggedIn = authService.isLoggedIn();
+
+        if (loggedIn && storedUser) {
+            setIsLoggedIn(true);
+            setUser(storedUser);
+        }
+    }, []);
+
+    // ✅ On successful login
     const handleLoginSuccess = () => {
+        const storedUser = authService.getUser();
+        setUser(storedUser);
         setIsLoggedIn(true);
         setShowLoginModal(false);
         showAlert({
@@ -34,8 +57,11 @@ export default function Header() {
         });
     };
 
+    // ✅ On logout
     const handleLogout = () => {
+        authService.logout();
         setIsLoggedIn(false);
+        setUser(null);
         showAlert({
             message: "You have logged out.",
             type: "info",
@@ -46,6 +72,7 @@ export default function Header() {
 
     return (
         <header className={styles.mainHeader}>
+            {/* 🔹 Top banner */}
             <div className={styles.label}>
                 <p>
                     <span><BsGift /></span>
@@ -54,8 +81,10 @@ export default function Header() {
                 </p>
             </div>
 
+            {/* 🔹 Navbar */}
             <nav className={styles.navbar}>
                 <div className={styles.navContainer}>
+                    {/* Logo */}
                     <Link href="/" className={styles.brand}>
                         <Image
                             src="/logo.png"
@@ -66,6 +95,7 @@ export default function Header() {
                         />
                     </Link>
 
+                    {/* Menu Links */}
                     <div className={`${styles.navLinks} ${menuOpen ? styles.showMenu : ""}`}>
                         <ul>
                             <li><Link href="/" className={styles.navLink}>Home</Link></li>
@@ -74,6 +104,7 @@ export default function Header() {
                             <li><Link href="/about" className={styles.navLink}>About Us</Link></li>
                         </ul>
 
+                        {/* Mobile user icons */}
                         {isLoggedIn && isMobile && (
                             <ul className={styles.mobileUserIcons}>
                                 <li><BsHeart /></li>
@@ -83,27 +114,42 @@ export default function Header() {
                         )}
                     </div>
 
+                    {/* Desktop User Section */}
                     {!isMobile && (
                         <div className={styles.userSection}>
                             {!isLoggedIn ? (
-                                <button onClick={() => setShowLoginModal(true)} className={styles.loginBtn}>
+                                <button
+                                    onClick={() => setShowLoginModal(true)}
+                                    className={styles.loginBtn}
+                                >
                                     Login
                                 </button>
                             ) : (
                                 <ul className={styles.userIcons}>
-                                    <li><BsHeart /></li>
-                                    <li><BsPerson /></li>
-                                    <li><BsBag /></li>
-                                    <li><button onClick={handleLogout} className={styles.logoutBtn}>Logout</button></li>
+                                    <li title="Wishlist"><BsHeart /></li>
+                                    <li title="Profile"><BsPerson /></li>
+                                    <li title="Cart"><BsBag /></li>
+                                    <li>
+                                        <button
+                                            onClick={handleLogout}
+                                            className={styles.logoutBtn}
+                                        >
+                                            Logout
+                                        </button>
+                                    </li>
                                 </ul>
                             )}
                         </div>
                     )}
 
+                    {/* Mobile actions */}
                     {isMobile && (
                         <div className={styles.mobileActions}>
                             {!isLoggedIn && (
-                                <button onClick={() => setShowLoginModal(true)} className={styles.loginBtn}>
+                                <button
+                                    onClick={() => setShowLoginModal(true)}
+                                    className={styles.loginBtn}
+                                >
                                     Login
                                 </button>
                             )}
