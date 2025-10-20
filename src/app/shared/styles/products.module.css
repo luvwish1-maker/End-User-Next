@@ -1,28 +1,28 @@
 .carouselWrapper {
-    width: 1441px;
-    height: 613px;
+    width: 100%;
+    max-width: 1200px;
     margin: 0 auto;
     position: relative;
-    gap: 39px;
+    padding: 20px 0;
 }
 
 .topButtons {
     display: flex;
     justify-content: flex-end;
-    gap: 12px;
-    margin-bottom: 20px;
+    gap: 10px;
+    margin-bottom: 15px;
 }
 
 .iconButton {
-    width: 48px;
-    height: 48px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     background: #fff8fb;
-    border: 1.84px solid #ffCCE0;
+    border: 1.5px solid #ffCCE0;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 22px;
+    font-size: 20px;
     cursor: pointer;
     transition: all 0.3s ease;
 }
@@ -33,100 +33,122 @@
 
 .carouselContainer {
     width: 100%;
-    max-width: 1441px;
-    margin: 0 auto;
 }
 
 .productCard {
-    width: 331px;
-    height: 613px;
-    gap: 24px;
+    width: 270px;
+    height: 480px;
     text-align: center;
     background: #fff;
-    border-radius: 10.12px;
-    border: 1.45px solid #0000001A;
-    padding-bottom: 20px;
+    border-radius: 10px;
+    border: 1px solid #0000001A;
+    padding-bottom: 15px;
+    margin: 0 auto;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.productCard:hover {
+    transform: translateY(-4px);
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .imageWrapper {
-    width: 331px;
-    height: 416px;
+    width: 100%;
+    height: 340px;
     overflow: hidden;
-    border-radius: 10.12px;
-    border: 1.45px solid #0000001A;
+    border-radius: 10px;
+    border: 1px solid #0000001A;
 }
 
 .productImage {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.productCard:hover .productImage {
+    transform: scale(1.03);
 }
 
 .productCategory {
-    width: 331px;
-    height: 24px;
-    font-family: Poppins;
+    font-family: "Poppins", sans-serif;
     font-weight: 500;
-    font-size: 17.34px;
-    line-height: 23.13px;
-    letter-spacing: 1%;
-    color: #999999;
+    font-size: 15px;
+    color: #999;
     margin-top: 10px;
-    padding: 2px 0;
 }
 
 .productName {
-    width: 331px;
-    height: 58px;
-    font-family: Poppins;
+    font-family: "Poppins", sans-serif;
     font-weight: 500;
-    font-size: 20.24px;
-    line-height: 28.91px;
-    letter-spacing: 2%;
-    color: #333333;
+    font-size: 17px;
+    color: #333;
+    margin: 5px 0;
+    height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 5px;
+    padding: 0 10px;
 }
 
 .priceRow {
-    width: 331px;
-    height: 24px;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 11.56px;
-    margin-top: 10px;
+    gap: 8px;
+    margin-top: 5px;
 }
 
 .discountedPrice {
-    font-family: Poppins;
+    font-family: "Poppins", sans-serif;
     font-weight: 600;
-    font-size: 20.24px;
-    line-height: 23.13px;
-    color: #333333;
-    padding: 2px 8px;
-    border-radius: 5px;
+    font-size: 18px;
+    color: #333;
 }
 
 .actualPrice {
-    font-family: Poppins;
+    font-family: "Poppins", sans-serif;
     font-weight: 500;
-    font-size: 17.34px;
-    line-height: 23.13px;
+    font-size: 15px;
     text-decoration: line-through;
-    color: #33333399;
-    padding: 2px 8px;
-    border-radius: 5px;
+    color: #999;
 }
 
 .discountTag {
-    font-family: Poppins;
+    font-family: "Poppins", sans-serif;
     font-weight: 600;
-    font-size: 14.45px;
-    line-height: 23.13px;
+    font-size: 13px;
     color: #5CBD57;
-    padding: 2px 6px;
-    border-radius: 5px;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1024px) {
+    .productCard {
+        width: 250px;
+        height: 440px;
+    }
+    .imageWrapper {
+        height: 300px;
+    }
+}
+
+@media (max-width: 700px) {
+    .carouselWrapper {
+        padding: 10px;
+    }
+
+    .topButtons {
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+
+    .productCard {
+        width: 90%;
+        height: auto;
+    }
+
+    .imageWrapper {
+        height: 300px;
+    }
 }

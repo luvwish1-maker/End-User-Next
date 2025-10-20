@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useRef, useEffect, useState } from "react";
 import Image from "next/image";
 import Slider from "react-slick";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
@@ -16,7 +16,9 @@ export default function Products() {
     const [error, setError] = useState<string | null>(null);
     const [page, setPage] = useState(1);
     const limit = 10;
-    let sliderRef: Slider | null = null;
+
+    // ✅ Properly typed reference for react-slick
+    const sliderRef = useRef<Slider | null>(null);
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -30,7 +32,6 @@ export default function Products() {
                 setLoading(false);
             }
         };
-
         fetchProducts();
     }, [page]);
 
@@ -53,13 +54,13 @@ export default function Products() {
             <div className={styles.topButtons}>
                 <button
                     className={styles.iconButton}
-                    onClick={() => sliderRef?.slickPrev()}
+                    onClick={() => sliderRef.current?.slickPrev()}
                 >
                     <BsArrowLeft />
                 </button>
                 <button
                     className={styles.iconButton}
-                    onClick={() => sliderRef?.slickNext()}
+                    onClick={() => sliderRef.current?.slickNext()}
                 >
                     <BsArrowRight />
                 </button>
@@ -69,7 +70,7 @@ export default function Products() {
                 {products.length === 0 ? (
                     <p>No products found.</p>
                 ) : (
-                    <Slider ref={(slider) => (sliderRef = slider)} {...settings}>
+                    <Slider ref={sliderRef} {...settings}>
                         {products.map((product) => {
                             const mainImage = product.images.find((img) => img.isMain);
                             const discountPercent =
@@ -84,8 +85,8 @@ export default function Products() {
                                             <Image
                                                 src={mainImage.url}
                                                 alt={mainImage.altText || product.name}
-                                                width={331}
-                                                height={416}
+                                                width={270}
+                                                height={340}
                                                 className={styles.productImage}
                                             />
                                         )}
