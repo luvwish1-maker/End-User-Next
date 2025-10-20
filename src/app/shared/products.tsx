@@ -2,6 +2,9 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import styles from "./styles/products.module.css";
 import { Product } from "../types/types";
 import ProductsService from "../services/productService";
@@ -17,7 +20,6 @@ export default function Products() {
         const fetchProducts = async () => {
             try {
                 const response = await ProductsService.getProducts({ page, limit });
-                // access the correct nested array from API
                 setProducts(response.data.data.data);
             } catch (err: unknown) {
                 if (err instanceof Error) setError(err.message);
@@ -30,15 +32,26 @@ export default function Products() {
         fetchProducts();
     }, [page]);
 
+    const settings = {
+        dots: false,
+        infinite: false,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        responsive: [
+            { breakpoint: 1024, settings: { slidesToShow: 2 } },
+            { breakpoint: 700, settings: { slidesToShow: 1 } },
+        ],
+    };
+
     if (loading) return <p>Loading products...</p>;
     if (error) return <p>Error: {error}</p>;
 
     return (
-        <div className={styles.container}>
+        <div className={styles.carouselContainer}>
             {products.length === 0 ? (
                 <p>No products found.</p>
             ) : (
-                <div className={styles.productsGrid}>
+                <Slider {...settings}>
                     {products.map((product) => {
                         const mainImage = product.images.find(img => img.isMain);
                         return (
@@ -51,7 +64,6 @@ export default function Products() {
                                             width={300}
                                             height={300}
                                             className={styles.productImage}
-                                            priority={false}
                                         />
                                     )}
                                 </div>
@@ -62,7 +74,7 @@ export default function Products() {
                             </div>
                         );
                     })}
-                </div>
+                </Slider>
             )}
         </div>
     );
