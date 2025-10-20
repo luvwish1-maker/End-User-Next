@@ -8,6 +8,7 @@ import { BsHeart, BsPerson, BsBag, BsGift, BsList } from "react-icons/bs";
 import { useAlert } from "../alert/alertProvider";
 import LoginModal from "@/app/login/loginModal";
 import { authService } from "@/app/services/authService";
+import { useConfirmation } from "../confirmation/useConfirmation";
 
 interface User {
     id: string;
@@ -23,6 +24,28 @@ export default function Header() {
     const [showLoginModal, setShowLoginModal] = useState(false);
     const [user, setUser] = useState<User | null>(null);
     const { showAlert } = useAlert();
+    const { confirm, ConfirmationElement } = useConfirmation();
+
+    const handleLogout = async () => {
+        const confirmed = await confirm({
+            title: "Logout",
+            message: "Are you sure you want to log out?",
+            confirmText: "Yes, log out",
+            cancelText: "Cancel",
+        });
+
+        if (confirmed) {
+            authService.logout();
+            setIsLoggedIn(false);
+            setUser(null);
+            showAlert({
+                message: "You have logged out.",
+                type: "info",
+                autoDismiss: true,
+                duration: 3000,
+            });
+        }
+    };
 
     // ✅ Detect screen size
     useEffect(() => {
@@ -52,19 +75,6 @@ export default function Header() {
         showAlert({
             message: "Successfully logged in!",
             type: "success",
-            autoDismiss: true,
-            duration: 3000,
-        });
-    };
-
-    // ✅ On logout
-    const handleLogout = () => {
-        authService.logout();
-        setIsLoggedIn(false);
-        setUser(null);
-        showAlert({
-            message: "You have logged out.",
-            type: "info",
             autoDismiss: true,
             duration: 3000,
         });
@@ -110,6 +120,15 @@ export default function Header() {
                                 <li><BsHeart /></li>
                                 <li><BsPerson /></li>
                                 <li><BsBag /></li>
+                                <li>
+                                    <button
+                                        onClick={handleLogout}
+                                        className={styles.loginBtn} // ✅ use new logoutBtn class
+                                    >
+                                        Logout
+                                    </button>
+                                </li>
+
                             </ul>
                         )}
                     </div>
@@ -132,7 +151,7 @@ export default function Header() {
                                     <li>
                                         <button
                                             onClick={handleLogout}
-                                            className={styles.logoutBtn}
+                                            className={styles.loginBtn}
                                         >
                                             Logout
                                         </button>
@@ -171,6 +190,8 @@ export default function Header() {
                     onLoginSuccess={handleLoginSuccess}
                 />
             )}
+
+            {ConfirmationElement}
         </header>
     );
 }
