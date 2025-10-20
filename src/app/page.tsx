@@ -19,6 +19,11 @@ export default function Home() {
       </div>
       <Products />
 
+      <div className={styles.head}>
+        <h3>Offer Sale 20% off</h3>
+      </div>
+      <Products />
+
       <Solution />
       <Counts />
       <Test />
