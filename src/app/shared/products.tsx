@@ -75,7 +75,13 @@ export default function Products() {
         ],
     };
 
-    if (loading) return <p>Loading products...</p>;
+   if (loading)
+    return (
+        <div className={styles.loaderWrapper}>
+            <div className={styles.loader}></div>
+        </div>
+    );
+
     if (error) return <p>Error: {error}</p>;
 
     return (
