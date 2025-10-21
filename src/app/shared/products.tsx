@@ -9,15 +9,20 @@ import "slick-carousel/slick/slick-theme.css";
 import styles from "./styles/products.module.css";
 import { Product } from "../types/types";
 import ProductsService from "../services/productService";
+import { authService } from "../services/authService";
+import LoginModal from "@/app/login/loginModal";
+import { useAlert } from "@/components/alert/alertProvider";
+import { AxiosError } from "axios";
 
 export default function Products() {
     const [products, setProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [page, setPage] = useState(1);
+    const [showLoginModal, setShowLoginModal] = useState(false);
     const limit = 10;
 
-    // ✅ Properly typed reference for react-slick
+    const { showAlert } = useAlert();
     const sliderRef = useRef<Slider | null>(null);
 
     useEffect(() => {
@@ -34,6 +39,59 @@ export default function Products() {
         };
         fetchProducts();
     }, [page]);
+
+    const handleAddToCart = async (productId: string) => {
+        const isLoggedIn = authService.isLoggedIn();
+
+        if (!isLoggedIn) {
+            setShowLoginModal(true);
+            showAlert({
+                message: "Please log in to add item to cart",
+                type: "info",
+                autoDismiss: true,
+                duration: 3000,
+            });
+            return;
+        }
+
+        try {
+            await ProductsService.addToCart({ productId, quantity: 1 });
+            showAlert({
+                message: "Added to cart!",
+                type: "success",
+                autoDismiss: true,
+                duration: 2500,
+            });
+        } catch (error: unknown) {
+            let message = "An unexpected error occurred";
+
+            if (error instanceof AxiosError) {
+                const backendMessage = error.response?.data?.message;
+                if (typeof backendMessage === "string") {
+                    message = backendMessage;
+                }
+            } else if (error instanceof Error) {
+                message = error.message;
+            }
+
+            showAlert({
+                message,
+                type: "error",
+                autoDismiss: true,
+                duration: 3000,
+            });
+        }
+    };
+
+    const handleLoginSuccess = () => {
+        setShowLoginModal(false);
+        showAlert({
+            message: "Successfully logged in!",
+            type: "success",
+            autoDismiss: true,
+            duration: 3000,
+        });
+    };
 
     const settings = {
         dots: false,
@@ -52,35 +110,34 @@ export default function Products() {
                     slidesToShow: 3,
                     slidesToScroll: 3,
                     infinite: true,
-                    dots: false
-                }
+                    dots: false,
+                },
             },
             {
                 breakpoint: 600,
                 settings: {
                     slidesToShow: 2,
                     slidesToScroll: 2,
-                    initialSlide: 2,
-                    dots: false
-                }
+                    dots: false,
+                },
             },
             {
                 breakpoint: 480,
                 settings: {
                     slidesToShow: 1,
                     slidesToScroll: 1,
-                    dots: false
-                }
-            }
+                    dots: false,
+                },
+            },
         ],
     };
 
-   if (loading)
-    return (
-        <div className={styles.loaderWrapper}>
-            <div className={styles.loader}></div>
-        </div>
-    );
+    if (loading)
+        return (
+            <div className={styles.loaderWrapper}>
+                <div className={styles.loader}></div>
+            </div>
+        );
 
     if (error) return <p>Error: {error}</p>;
 
@@ -142,13 +199,26 @@ export default function Products() {
                                         </span>
                                     </div>
 
-                                    <button className={styles.cartButton}><BsPlusLg /> Add to Cart</button>
+                                    <button
+                                        className={styles.cartButton}
+                                        onClick={() => handleAddToCart(product.id)}
+                                    >
+                                        <BsPlusLg /> Add to Cart
+                                    </button>
                                 </div>
                             );
                         })}
                     </Slider>
                 )}
             </div>
+
+            {/* ✅ Login Modal */}
+            {showLoginModal && (
+                <LoginModal
+                    onClose={() => setShowLoginModal(false)}
+                    onLoginSuccess={handleLoginSuccess}
+                />
+            )}
         </div>
     );
 }
