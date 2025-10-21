@@ -3,7 +3,7 @@
 import { useRef, useEffect, useState } from "react";
 import Image from "next/image";
 import Slider from "react-slick";
-import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
+import { BsArrowLeft, BsArrowRight, BsPlusLg } from "react-icons/bs";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import styles from "./styles/products.module.css";
@@ -141,6 +141,8 @@ export default function Products() {
                                             -{Math.round(discountPercent)}%
                                         </span>
                                     </div>
+
+                                    <button className={styles.cartButton}><BsPlusLg /> Add to Cart</button>
                                 </div>
                             );
                         })}

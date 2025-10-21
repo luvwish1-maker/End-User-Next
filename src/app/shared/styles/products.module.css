@@ -156,6 +156,32 @@
     color: #5cbd57;
 }
 
+.cartButton {
+    width: 134px;
+    height: 36px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 6px;
+    padding: 8px 12px;
+    color: #ffffff;
+    background-color: #a31157;
+    font-family: "Inter", sans-serif;
+    font-weight: 500;
+    margin-top: 1rem;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0px;
+    border: 1px solid #a31157;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.cartButton:hover {
+    color: #a31157;
+    background-color: #ffffff;
+}
+
 /* ---------- RESPONSIVE STYLES ---------- */
 
 /* Medium screens - Tablets */
