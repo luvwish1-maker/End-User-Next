@@ -3,6 +3,7 @@ import "./globals.css";
 import Header from "@/components/header/header";
 import Footer from "@/components/footer/footer";
 import { AlertProvider } from "@/components/alert/alertProvider";
+import { AuthProvider } from "./lib/authContext";
 
 export const metadata: Metadata = {
   title: "LuvWish",
@@ -13,11 +14,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className="min-h-screen flex flex-col">
-        <AlertProvider>
-          <Header />
-          <main className="flex-1">{children}</main>
-          <Footer />
-        </AlertProvider>
+        <AuthProvider>
+          <AlertProvider>
+            <Header />
+            <main className="flex-1">{children}</main>
+            <Footer />
+          </AlertProvider>
+        </AuthProvider>
       </body>
     </html>
   );

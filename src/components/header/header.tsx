@@ -4,14 +4,14 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./header.module.css";
-import { BsHeart, BsPerson, BsBag, BsGift, BsList, BsPower  } from "react-icons/bs";
+import { BsHeart, BsPerson, BsBag, BsGift, BsList, BsPower } from "react-icons/bs";
 import { useAlert } from "../alert/alertProvider";
 import LoginModal from "@/app/login/loginModal";
-import { authService } from "@/app/services/authService";
 import { useConfirmation } from "../confirmation/useConfirmation";
+import { useAuth } from "@/app/lib/authContext";
 
 export default function Header() {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const { isLoggedIn, login, logout } = useAuth();
     const [menuOpen, setMenuOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
     const [showLoginModal, setShowLoginModal] = useState(false);
@@ -27,8 +27,7 @@ export default function Header() {
         });
 
         if (confirmed) {
-            authService.logout();
-            setIsLoggedIn(false);
+            logout();
             showAlert({
                 message: "You have logged out.",
                 type: "info",
@@ -46,19 +45,9 @@ export default function Header() {
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
-    // ✅ Load login state from localStorage
-    useEffect(() => {
-        const storedUser = authService.getUser();
-        const loggedIn = authService.isLoggedIn();
-
-        if (loggedIn && storedUser) {
-            setIsLoggedIn(true);
-        }
-    }, []);
-
     // ✅ On successful login
     const handleLoginSuccess = () => {
-        setIsLoggedIn(true);
+        login();
         setShowLoginModal(false);
         showAlert({
             message: "Successfully logged in!",

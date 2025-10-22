@@ -9,16 +9,17 @@ import "slick-carousel/slick/slick-theme.css";
 import styles from "./styles/products.module.css";
 import { Product } from "../types/types";
 import ProductsService from "../services/productService";
-import { authService } from "../services/authService";
 import LoginModal from "@/app/login/loginModal";
 import { useAlert } from "@/components/alert/alertProvider";
 import { AxiosError } from "axios";
+import { useAuth } from "../lib/authContext";
 
 export default function Products() {
     const [products, setProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [page, setPage] = useState(1);
+    const { isLoggedIn, login } = useAuth();
     const [showLoginModal, setShowLoginModal] = useState(false);
     const limit = 10;
 
@@ -41,9 +42,7 @@ export default function Products() {
     }, [page]);
 
     const handleAddToCart = async (productId: string) => {
-        const isLoggedIn = authService.isLoggedIn();
-
-        if (!isLoggedIn) {
+        if (!isLoggedIn) { // ✅ use context instead of authService
             setShowLoginModal(true);
             showAlert({
                 message: "Please log in to add item to cart",
@@ -84,6 +83,7 @@ export default function Products() {
     };
 
     const handleLoginSuccess = () => {
+        login();
         setShowLoginModal(false);
         showAlert({
             message: "Successfully logged in!",
@@ -99,10 +99,8 @@ export default function Products() {
         slidesToShow: 5,
         slidesToScroll: 2,
         swipeToSlide: true,
-        autoplay: true,
         speed: 2000,
         autoplaySpeed: 4000,
-        pauseOnHover: true,
         responsive: [
             {
                 breakpoint: 1024,
