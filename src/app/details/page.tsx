@@ -123,7 +123,7 @@ export default function Details() {
                     <div className={styles.iconRow}>
                         <div className={styles.iconItem}>
                             <BsTruck color="#A31157" size={18} />
-                            <span>Fast Delivery</span>
+                            <span>Free Delivery</span>
                         </div>
                         <div className={styles.iconItem}>
                             <BsShield color="#A31157" size={18} />
@@ -135,7 +135,7 @@ export default function Details() {
                         </div>
                         <div className={styles.iconItem}>
                             <BsLock color="#A31157" size={18} />
-                            <span>Top Rated</span>
+                            <span>Discreet Package</span>
                         </div>
                     </div>
 
@@ -143,9 +143,9 @@ export default function Details() {
                     <div className={styles.offersSection}>
                         <h4>Available Offers</h4>
                         <ul>
-                            <li><BsCheckCircle color="#1F8A5B" /> 10% off on first purchase</li>
-                            <li><BsCheckCircle color="#1F8A5B" /> Buy 2 get 1 free</li>
-                            <li><BsCheckCircle color="#1F8A5B" /> Free shipping on orders over ₹999</li>
+                            <li><BsCheckCircle color="#1F8A5B" /> Get 10% instant discount on orders above ₹999</li>
+                            <li><BsCheckCircle color="#1F8A5B" /> Free shipping on all prepaid orders</li>
+                            <li><BsCheckCircle color="#1F8A5B" /> Subscribe & save an extra 10% on every order</li>
                         </ul>
                     </div>
                 </div>
