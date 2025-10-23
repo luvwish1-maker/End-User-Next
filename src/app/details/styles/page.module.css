@@ -5,6 +5,22 @@
     max-width: 1200px;
 }
 
+/* Spinner */
+.spinner {
+  border: 6px solid #f3f3f3;
+  border-top: 6px solid #c61469;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  margin: 50px auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 /* Product Layout */
 .productLayout {
     display: flex;
@@ -282,25 +298,111 @@
     color: #000;
 }
 
-/* Responsive */
+/* Responsive Layouts */
 @media (max-width: 992px) {
     .productLayout {
         flex-direction: column;
         align-items: center;
+        gap: 30px;
     }
 
-    .title {
-        font-size: 2rem;
+    .infoSection {
+        width: 100%;
+        padding: 0 15px;
+    }
+
+    .offersSection {
+        width: 100%;
+    }
+
+    .price {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .discountBadge {
+        margin-top: 4px;
     }
 }
 
-@media (max-width: 576px) {
+@media (max-width: 768px) {
+    .title {
+        font-size: 2rem;
+    }
+
+    .description {
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+
+    .price .discountprice {
+        font-size: 28px;
+        line-height: 34px;
+    }
+
+    .price .actualprice {
+        font-size: 18px;
+        line-height: 24px;
+    }
+
     .quantityBlock {
         flex-direction: column;
         align-items: flex-start;
+        gap: 8px;
+    }
+
+    .buttonColumn button {
+        height: 50px;
+        font-size: 0.95rem;
     }
 
     .iconRow {
         justify-content: space-between;
+        gap: 10px;
+    }
+
+    .offersSection ul li {
+        font-size: 13px;
+        gap: 6px;
+    }
+}
+
+@media (max-width: 576px) {
+    .title {
+        font-size: 1.7rem;
+    }
+
+    .description {
+        font-size: 0.9rem;
+    }
+
+    .price .discountprice {
+        font-size: 24px;
+        line-height: 28px;
+    }
+
+    .price .actualprice {
+        font-size: 16px;
+        line-height: 22px;
+    }
+
+    .quantityControl {
+        gap: 8px;
+    }
+
+    .qtyBtn {
+        width: 35px;
+        height: 35px;
+    }
+
+    .buttonColumn button {
+        height: 45px;
+        font-size: 0.9rem;
+    }
+
+    .offersSection {
+        padding: 8px;
+        height: auto;
     }
 }

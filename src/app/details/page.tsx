@@ -30,7 +30,7 @@ export default function Details() {
         fetchProduct();
     }, [id]);
 
-    if (loading) return <p className={styles.center}>Loading...</p>;
+    if (loading) return <div className={styles.spinner}></div>;
     if (!product) return <p className={styles.center}>Product not found.</p>;
 
     const mainImage = product.images?.find((img) => img.isMain)?.url || "";
