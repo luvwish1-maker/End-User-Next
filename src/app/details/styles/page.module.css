@@ -7,18 +7,23 @@
 
 /* Spinner */
 .spinner {
-  border: 6px solid #f3f3f3;
-  border-top: 6px solid #c61469;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  animation: spin 1s linear infinite;
-  margin: 50px auto;
+    border: 6px solid #f3f3f3;
+    border-top: 6px solid #c61469;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin: 50px auto;
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 /* Product Layout */
@@ -298,6 +303,43 @@
     color: #000;
 }
 
+.head {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 1280px;
+    max-width: 100%;
+    gap: 12px;
+    opacity: 1;
+    padding: 4rem 7rem 0rem 7rem;
+}
+
+.head h3 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 52px;
+    line-height: 100%;
+    letter-spacing: 0;
+    color: #191919;
+    margin: 0;
+}
+
+.countsWrapper {
+    margin-top: 50px;
+    margin-bottom: 10px;
+}
+
+@media (max-width: 1024px) {
+    .head {
+        padding: 2rem 4rem;
+    }
+
+    .head h3 {
+        font-size: 42px;
+    }
+}
+
 /* Responsive Layouts */
 @media (max-width: 992px) {
     .productLayout {
@@ -404,5 +446,15 @@
     .offersSection {
         padding: 8px;
         height: auto;
+    }
+
+    .head {
+        padding: 1.5rem 1.5rem;
+        gap: 8px;
+    }
+
+    .head h3 {
+        font-size: 32px;
+        line-height: 1.2;
     }
 }
