@@ -79,6 +79,7 @@ export default function Cart() {
                             <div className={styles.details}>
                                 <h4>{item.product.name}</h4>
                                 <p>{item.product.description}</p>
+                                <span className={styles.stockBadge}>In Stock</span>
                                 <div className={styles.priceRow}>
                                     <span className={styles.discountedPrice}>₹{item.product.discountedPrice}</span>
                                     <span className={styles.actualPrice}>₹{item.product.actualPrice}</span>

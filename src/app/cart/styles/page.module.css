@@ -64,6 +64,22 @@
     border-radius: 16px;
 }
 
+.stockBadge {
+    top: 59.98px;
+    width: 62.27px;
+    height: 20px;
+    background: #1F8A5B1A;
+    font-family: Inter;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    color: #1F8A5B;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .details {
     flex: 1;
     display: flex;
