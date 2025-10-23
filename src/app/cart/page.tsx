@@ -6,6 +6,7 @@ import { CartItems } from "../types/types";
 import styles from "./styles/page.module.css";
 import ProductsService from "../services/productService";
 import { BsX } from "react-icons/bs";
+import { BsShield, BsArrowRepeat, BsRepeat } from "react-icons/bs";
 
 export default function Cart() {
     const [cartItems, setCartItems] = useState<CartItems[]>([]);
@@ -92,7 +93,7 @@ export default function Cart() {
 
                                 <div className={styles.quantityControl}>
                                     <button onClick={() => handleQuantityChange(item, -1)}>-</button>
-                                    <span>{item.quantity}</span>
+                                    <span className={styles.quantityn}>{item.quantity}</span>
                                     <button onClick={() => handleQuantityChange(item, 1)}>+</button>
                                 </div>
                             </div>
@@ -103,27 +104,27 @@ export default function Cart() {
                 <div className={styles.right}>
                     <h4>Order Summary</h4>
                     <div className={styles.summaryItem}>
-                        <span>Subtotal ({cartItems.length} items)</span>
-                        <span>₹{subtotal}</span>
+                        <span className={styles.subtotaln}>Subtotal ({cartItems.length} items)</span>
+                        <span className={styles.subtotalA}>₹{subtotal}</span>
                     </div>
                     <div className={styles.summaryItem}>
-                        <span>Product Savings</span>
-                        <span>-₹{totalSavings}</span>
+                        <span className={styles.proSavingsN}>Product Savings</span>
+                        <span className={styles.proSavingsN}>-₹{totalSavings}</span>
                     </div>
                     <div className={styles.summaryItem}>
-                        <span>Delivery Fee</span>
-                        <span>FREE</span>
+                        <span className={styles.subtotaln}>Delivery Fee</span>
+                        <span className={styles.proSavingsN}>FREE</span>
                     </div>
                     <hr />
                     <div className={styles.total}>
-                        <span>Total Amount</span>
-                        <span>₹{subtotal}</span>
+                        <span className={styles.totalN}>Total Amount</span>
+                        <span className={styles.totalA}>₹{subtotal}</span>
                     </div>
                     <button className={styles.addToCartBtn}>Add to cart</button>
                     <button className={styles.buyNowBtn}>Buy Now</button>
-                    <p className={styles.subInfo}>Subscribe & Save 10%</p>
-                    <p className={styles.subInfo}>Secure Checkout</p>
-                    <p className={styles.subInfo}>Easy 30-day Returns</p>
+                    <p className={styles.subInfoSub}><BsRepeat color="#A31157" size={15}/> Subscribe & Save 10%</p>
+                    <p className={styles.subInfo}><BsShield color="#A31157" size={15} /> Secure Checkout</p>
+                    <p className={styles.subInfo}><BsArrowRepeat color="#A31157" size={15} /> Easy 30-day Returns</p>
                 </div>
             </div>
         </div>

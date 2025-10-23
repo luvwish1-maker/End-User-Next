@@ -155,16 +155,20 @@
 
 .quantityControl button {
     padding: 2px 8px;
-    border: 1px solid #e2004d;
-    color: #e2004d;
+    border: 1px solid #C61469;
+    color: #C61469;
     background: transparent;
     cursor: pointer;
     border-radius: 4px;
 }
 
+.quantityn{
+    color: #0F0F12;
+}
+
 .right {
     flex: 1;
-    border: 1px solid #eee;
+    border: 1px solid #FFE5EF;
     padding: 20px;
     border-radius: 10px;
     height: fit-content;
@@ -172,12 +176,38 @@
 
 .right h4 {
     margin-bottom: 15px;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 28px;
+    color: #0F0F12;
+    font-family: Poppins;
 }
 
 .summaryItem {
     display: flex;
     justify-content: space-between;
     margin-bottom: 10px;
+}
+
+.subtotaln {
+    color: #6B6B76;
+    line-height: 24px;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.subtotalA {
+    color: #0F0F12;
+    line-height: 24px;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.proSavingsN {
+    color: #1F8A5B;
+    line-height: 24px;
+    font-weight: 400;
+    font-size: 16px;
 }
 
 .total {
@@ -188,10 +218,24 @@
     margin-top: 10px;
 }
 
+.totalN {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 28px;
+    color: #0F0F12;
+}
+
+.totalA {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 28px;
+    color: #A31157;
+}
+
 .addToCartBtn {
     width: 100%;
     padding: 10px;
-    background: #e2004d;
+    background: #C61469;
     color: #fff;
     border: none;
     border-radius: 25px;
@@ -203,15 +247,25 @@
     width: 100%;
     padding: 10px;
     background: transparent;
-    color: #e2004d;
-    border: 1px solid #e2004d;
+    color: #C61469;
+    border: 1px solid #C61469;
     border-radius: 25px;
     margin-top: 10px;
     cursor: pointer;
+}
+
+.subInfoSub {
+    font-size: 12px;
+    color: #A31157;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    text-align: center;
 }
 
 .subInfo {
     font-size: 12px;
     color: #666;
     margin-top: 5px;
+    margin-bottom: 10px;
+    text-align: center;
 }
