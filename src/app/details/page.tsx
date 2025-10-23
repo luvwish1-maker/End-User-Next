@@ -67,8 +67,15 @@ export default function Details() {
                     <p className={styles.description}>{product.description}</p>
 
                     <div className={styles.price}>
-                        <p>{product.discountedPrice}</p>
-                        <p>{product.actualPrice}</p>
+                        <p className={styles.discountprice}>₹{product.discountedPrice}</p>
+                        <p className={styles.actualprice}>₹{product.actualPrice}</p>
+                        {product.actualPrice > product.discountedPrice && (
+                            <div className={styles.discountBadge}>
+                                {Math.round(
+                                    ((product.actualPrice - product.discountedPrice) / product.actualPrice) * 100
+                                )}% OFF
+                            </div>
+                        )}
                     </div>
 
                     {/* Stock */}
