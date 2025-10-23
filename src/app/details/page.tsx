@@ -7,6 +7,10 @@ import { BsStarFill, BsTruck, BsShield, BsArrowRepeat, BsLock, BsCheckCircle, Bs
 import { Product } from "@/app/types/types";
 import ProductsService from "../services/productService";
 import styles from "./styles/page.module.css";
+import { useAuth } from "../lib/authContext";
+import { useAlert } from "@/components/alert/alertProvider";
+import LoginModal from "@/app/login/loginModal";
+import { AxiosError } from "axios";
 
 export default function Details() {
     const searchParams = useSearchParams();
@@ -14,6 +18,9 @@ export default function Details() {
     const [product, setProduct] = useState<Product | null>(null);
     const [loading, setLoading] = useState(true);
     const [quantity, setQuantity] = useState(1);
+    const { isLoggedIn, login } = useAuth();
+    const [showLoginModal, setShowLoginModal] = useState(false);
+    const { showAlert } = useAlert();
 
     useEffect(() => {
         if (!id) return;
@@ -30,6 +37,58 @@ export default function Details() {
         fetchProduct();
     }, [id]);
 
+    const handleAddToCart = async () => {
+        if (!product) return;
+
+        if (!isLoggedIn) {
+            setShowLoginModal(true);
+            showAlert({
+                message: "Please log in to add item to cart",
+                type: "info",
+                autoDismiss: true,
+                duration: 3000,
+            });
+            return;
+        }
+
+        try {
+            await ProductsService.addToCart({ productId: product.id, quantity });
+            showAlert({
+                message: "Added to cart!",
+                type: "success",
+                autoDismiss: true,
+                duration: 2500,
+            });
+        } catch (error: unknown) {
+            let message = "An unexpected error occurred";
+
+            if (error instanceof AxiosError) {
+                const backendMessage = error.response?.data?.message;
+                if (typeof backendMessage === "string") message = backendMessage;
+            } else if (error instanceof Error) {
+                message = error.message;
+            }
+
+            showAlert({
+                message,
+                type: "error",
+                autoDismiss: true,
+                duration: 3000,
+            });
+        }
+    };
+
+    const handleLoginSuccess = () => {
+        login();
+        setShowLoginModal(false);
+        showAlert({
+            message: "Successfully logged in!",
+            type: "success",
+            autoDismiss: true,
+            duration: 3000,
+        });
+    };
+
     if (loading) return <div className={styles.spinner}></div>;
     if (!product) return <p className={styles.center}>Product not found.</p>;
 
@@ -38,7 +97,6 @@ export default function Details() {
     return (
         <div className={`container ${styles.detailsContainer}`}>
             <div className={styles.productLayout}>
-                {/* Left: Image */}
                 <div className={styles.imageSection}>
                     {mainImage && (
                         <Image
@@ -51,11 +109,9 @@ export default function Details() {
                     )}
                 </div>
 
-                {/* Right: Info */}
                 <div className={styles.infoSection}>
                     <h2 className={styles.title}>{product.name}</h2>
 
-                    {/* Stars / Reviews */}
                     <div className={styles.stars}>
                         {[...Array(5)].map((_, i) => (
                             <BsStarFill key={i} color="#A31157" size={20} />
@@ -63,7 +119,6 @@ export default function Details() {
                         <p>4.9(3,847 reviews)</p>
                     </div>
 
-                    {/* Description */}
                     <p className={styles.description}>{product.description}</p>
 
                     <div className={styles.price}>
@@ -78,68 +133,37 @@ export default function Details() {
                         )}
                     </div>
 
-                    {/* Stock */}
-                    <p
-                        className={`${styles.stockStatus} ${product.isStock ? styles.inStock : styles.outOfStock
-                            }`}
-                    >
-                        {product.isStock
-                            ? `In Stock (${product.stockCount} available)`
-                            : "Out of Stock"}
+                    <p className={`${styles.stockStatus} ${product.isStock ? styles.inStock : styles.outOfStock}`}>
+                        {product.isStock ? `In Stock (${product.stockCount} available)` : "Out of Stock"}
                     </p>
 
-                    {/* Quantity Block */}
                     <div className={styles.quantityBlock}>
                         <label>Quantity:</label>
                         <div className={styles.quantityControl}>
-                            <button
-                                onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                                className={styles.qtyBtn}
-                            >
-                                -
-                            </button>
+                            <button onClick={() => setQuantity((q) => Math.max(1, q - 1))} className={styles.qtyBtn}>-</button>
                             <span>{quantity}</span>
-                            <button
-                                onClick={() => setQuantity((q) => q + 1)}
-                                className={styles.qtyBtn}
-                            >
-                                +
-                            </button>
+                            <button onClick={() => setQuantity((q) => q + 1)} className={styles.qtyBtn}>+</button>
                         </div>
                     </div>
 
-                    {/* Buttons: Add to Cart / Buy Now in separate columns */}
                     <div className={styles.buttonColumn}>
-                        <button className={styles.addToCart}>Add to Cart</button>
+                        <button className={styles.addToCart} onClick={handleAddToCart}>
+                            Add to Cart
+                        </button>
                     </div>
                     <div className={styles.buttonColumn}>
                         <button className={styles.buyNow}>Buy Now</button>
                     </div>
 
-                    {/* Subscribe & Save */}
                     <p className={styles.subscribe}><BsRepeat />  Subscribe & Save 10%</p>
 
-                    {/* Icons with labels */}
                     <div className={styles.iconRow}>
-                        <div className={styles.iconItem}>
-                            <BsTruck color="#A31157" size={18} />
-                            <span>Free Delivery</span>
-                        </div>
-                        <div className={styles.iconItem}>
-                            <BsShield color="#A31157" size={18} />
-                            <span>Secure Payment</span>
-                        </div>
-                        <div className={styles.iconItem}>
-                            <BsArrowRepeat color="#A31157" size={18} />
-                            <span>Easy Returns</span>
-                        </div>
-                        <div className={styles.iconItem}>
-                            <BsLock color="#A31157" size={18} />
-                            <span>Discreet Package</span>
-                        </div>
+                        <div className={styles.iconItem}><BsTruck color="#A31157" size={18} /><span>Free Delivery</span></div>
+                        <div className={styles.iconItem}><BsShield color="#A31157" size={18} /><span>Secure Payment</span></div>
+                        <div className={styles.iconItem}><BsArrowRepeat color="#A31157" size={18} /><span>Easy Returns</span></div>
+                        <div className={styles.iconItem}><BsLock color="#A31157" size={18} /><span>Discreet Package</span></div>
                     </div>
 
-                    {/* Available Offers */}
                     <div className={styles.offersSection}>
                         <h4>Available Offers</h4>
                         <ul>
@@ -150,6 +174,8 @@ export default function Details() {
                     </div>
                 </div>
             </div>
+
+            {showLoginModal && <LoginModal onClose={() => setShowLoginModal(false)} onLoginSuccess={handleLoginSuccess} />}
         </div>
     );
 }
