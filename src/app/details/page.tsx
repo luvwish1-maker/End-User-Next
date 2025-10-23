@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Image from "next/image";
-import { BsStarFill, BsTruck, BsShield, BsArrowRepeat, BsLock } from "react-icons/bs";
+import { BsStarFill, BsTruck, BsShield, BsArrowRepeat, BsLock, BsCheckCircle, BsRepeat } from "react-icons/bs";
 import { Product } from "@/app/types/types";
 import ProductsService from "../services/productService";
 import styles from "./styles/page.module.css";
@@ -58,13 +58,28 @@ export default function Details() {
                     {/* Stars / Reviews */}
                     <div className={styles.stars}>
                         {[...Array(5)].map((_, i) => (
-                            <BsStarFill key={i} color="#FFD700" size={20} />
+                            <BsStarFill key={i} color="#A31157" size={20} />
                         ))}
                         <p>4.9(3,847 reviews)</p>
                     </div>
 
                     {/* Description */}
                     <p className={styles.description}>{product.description}</p>
+
+                    <div className={styles.price}>
+                        <p>{product.discountedPrice}</p>
+                        <p>{product.actualPrice}</p>
+                    </div>
+
+                    {/* Stock */}
+                    <p
+                        className={`${styles.stockStatus} ${product.isStock ? styles.inStock : styles.outOfStock
+                            }`}
+                    >
+                        {product.isStock
+                            ? `In Stock (${product.stockCount} available)`
+                            : "Out of Stock"}
+                    </p>
 
                     {/* Quantity Block */}
                     <div className={styles.quantityBlock}>
@@ -95,24 +110,24 @@ export default function Details() {
                     </div>
 
                     {/* Subscribe & Save */}
-                    <p className={styles.subscribe}>Subscribe & Save 10%</p>
+                    <p className={styles.subscribe}><BsRepeat />  Subscribe & Save 10%</p>
 
                     {/* Icons with labels */}
                     <div className={styles.iconRow}>
                         <div className={styles.iconItem}>
-                            <span><BsTruck /></span>
+                            <BsTruck color="#A31157" size={18} />
                             <span>Fast Delivery</span>
                         </div>
                         <div className={styles.iconItem}>
-                            <span><BsShield /></span>
+                            <BsShield color="#A31157" size={18} />
                             <span>Secure Payment</span>
                         </div>
                         <div className={styles.iconItem}>
-                            <span><BsArrowRepeat /></span>
+                            <BsArrowRepeat color="#A31157" size={18} />
                             <span>Easy Returns</span>
                         </div>
                         <div className={styles.iconItem}>
-                            <span><BsLock /></span>
+                            <BsLock color="#A31157" size={18} />
                             <span>Top Rated</span>
                         </div>
                     </div>
@@ -121,21 +136,11 @@ export default function Details() {
                     <div className={styles.offersSection}>
                         <h4>Available Offers</h4>
                         <ul>
-                            <li>10% off on first purchase</li>
-                            <li>Buy 2 get 1 free</li>
-                            <li>Free shipping on orders over ₹999</li>
+                            <li><BsCheckCircle color="#1F8A5B" /> 10% off on first purchase</li>
+                            <li><BsCheckCircle color="#1F8A5B" /> Buy 2 get 1 free</li>
+                            <li><BsCheckCircle color="#1F8A5B" /> Free shipping on orders over ₹999</li>
                         </ul>
                     </div>
-
-                    {/* Stock */}
-                    <p
-                        className={`${styles.stockStatus} ${product.isStock ? styles.inStock : styles.outOfStock
-                            }`}
-                    >
-                        {product.isStock
-                            ? `In Stock (${product.stockCount} available)`
-                            : "Out of Stock"}
-                    </p>
                 </div>
             </div>
         </div>
