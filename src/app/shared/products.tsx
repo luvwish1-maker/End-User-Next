@@ -13,6 +13,7 @@ import LoginModal from "@/app/login/loginModal";
 import { useAlert } from "@/components/alert/alertProvider";
 import { AxiosError } from "axios";
 import { useAuth } from "../lib/authContext";
+import { useRouter } from "next/navigation";
 
 export default function Products() {
     const [products, setProducts] = useState<Product[]>([]);
@@ -25,6 +26,12 @@ export default function Products() {
 
     const { showAlert } = useAlert();
     const sliderRef = useRef<Slider | null>(null);
+
+    const router = useRouter();
+
+    const handleProductClick = (productId: string) => {
+        router.push(`/details?id=${productId}`);
+    };
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -169,7 +176,7 @@ export default function Products() {
                                 100;
 
                             return (
-                                <div key={product.id} className={styles.productCard}>
+                                <div key={product.id} className={styles.productCard} onClick={() => handleProductClick(product.id)}>
                                     <div className={styles.imageWrapper}>
                                         {mainImage && (
                                             <Image
@@ -199,7 +206,10 @@ export default function Products() {
 
                                     <button
                                         className={styles.cartButton}
-                                        onClick={() => handleAddToCart(product.id)}
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            handleAddToCart(product.id);
+                                        }}
                                     >
                                         <BsPlusLg /> Add to Cart
                                     </button>
