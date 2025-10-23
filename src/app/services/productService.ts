@@ -22,6 +22,11 @@ export interface ProductResponse {
   data: Product;
 }
 
+export interface CartResponse {
+  success: boolean;
+  data: CartItem[];
+}
+
 const ProductsService = {
     // Products
     getProducts: (params?: GetProductsParams) => api.get<ProductsResponse>('/products', { params }),
@@ -29,7 +34,7 @@ const ProductsService = {
 
     // Cart
     addToCart: (item: CartItem) => api.post('/cart/add', item),
-    getCart: () => api.get<CartItem[]>('/cart'),
+    getCart: () => api.get<CartResponse>('/cart'),
     removeCartItem: (id: string) => api.delete(`/cart/delete-cart/${id}`),
     updateCartItem: (item: CartItem) => api.patch('/cart/update-cart', item),
 

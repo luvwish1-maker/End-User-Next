@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import styles from "./header.module.css";
 import { BsHeart, BsPerson, BsBag, BsGift, BsList, BsPower } from "react-icons/bs";
 import { useAlert } from "../alert/alertProvider";
@@ -11,6 +12,7 @@ import { useConfirmation } from "../confirmation/useConfirmation";
 import { useAuth } from "@/app/lib/authContext";
 
 export default function Header() {
+    const router = useRouter();
     const { isLoggedIn, login, logout } = useAuth();
     const [menuOpen, setMenuOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
@@ -57,6 +59,10 @@ export default function Header() {
         });
     };
 
+        const goToCart = () => {
+        router.push("/cart");
+    };
+
     return (
         <header className={styles.mainHeader}>
             {/* 🔹 Top banner */}
@@ -96,7 +102,7 @@ export default function Header() {
                             <ul className={styles.mobileUserIcons}>
                                 <li><BsHeart /></li>
                                 <li><BsPerson /></li>
-                                <li><BsBag /></li>
+                                <li onClick={goToCart} style={{ cursor: "pointer" }}><BsBag /></li>
                                 <li title="Logout">
                                     <button onClick={handleLogout}>
                                         <BsPower />
@@ -121,7 +127,7 @@ export default function Header() {
                                 <ul className={styles.userIcons}>
                                     <li title="Wishlist"><BsHeart /></li>
                                     <li title="Profile"><BsPerson /></li>
-                                    <li title="Cart"><BsBag /></li>
+                                    <li onClick={goToCart} style={{ cursor: "pointer" }} title="Cart"><BsBag /></li>
                                     <li title="Logout">
                                         <button onClick={handleLogout}>
                                             <BsPower />

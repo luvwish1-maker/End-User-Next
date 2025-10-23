@@ -1,0 +1,148 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.head h3 {
+    font-size: 28px;
+    margin-bottom: 5px;
+}
+
+.head p {
+    color: #666;
+}
+
+.content {
+    display: flex;
+    gap: 40px;
+    margin-top: 20px;
+}
+
+.left {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.cartItem {
+    display: flex;
+    gap: 20px;
+    padding: 15px;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    align-items: center;
+}
+
+.imageWrapper {
+    width: 100px;
+    height: 100px;
+    position: relative;
+}
+
+.productImage {
+    border-radius: 10px;
+}
+
+.details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.price {
+    font-weight: bold;
+    color: #e2004d;
+}
+
+.originalPrice {
+    text-decoration: line-through;
+    color: #999;
+    font-weight: normal;
+    margin-left: 10px;
+}
+
+.savings {
+    color: green;
+    font-size: 12px;
+}
+
+.quantityControl {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.quantityControl button {
+    padding: 2px 8px;
+    border: 1px solid #e2004d;
+    color: #e2004d;
+    background: transparent;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.removeBtn {
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #999;
+    align-self: flex-start;
+}
+
+.right {
+    flex: 1;
+    border: 1px solid #eee;
+    padding: 20px;
+    border-radius: 10px;
+    height: fit-content;
+}
+
+.right h4 {
+    margin-bottom: 15px;
+}
+
+.summaryItem {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.total {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.addToCartBtn {
+    width: 100%;
+    padding: 10px;
+    background: #e2004d;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+.buyNowBtn {
+    width: 100%;
+    padding: 10px;
+    background: transparent;
+    color: #e2004d;
+    border: 1px solid #e2004d;
+    border-radius: 25px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.subInfo {
+    font-size: 12px;
+    color: #666;
+    margin-top: 5px;
+}
