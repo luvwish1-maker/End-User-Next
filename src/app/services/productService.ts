@@ -17,10 +17,15 @@ interface ProductsResponse {
     };
 }
 
+export interface ProductResponse {
+  success: boolean;
+  data: Product;
+}
+
 const ProductsService = {
     // Products
     getProducts: (params?: GetProductsParams) => api.get<ProductsResponse>('/products', { params }),
-    getProductByID: (id: string) => api.get<Product>(`/products/${id}`),
+    getProductByID: (id: string) => api.get<ProductResponse>(`/products/${id}`),
 
     // Cart
     addToCart: (item: CartItem) => api.post('/cart/add', item),
