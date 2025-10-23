@@ -1,6 +1,6 @@
 // services/productsService.ts
 import api from '../lib/axios';
-import { CartItem, GetProductsParams, OrderItem, Product, WishlistItem } from '../types/types';
+import { CartItem, CartItems, GetProductsParams, OrderItem, Product, WishlistItem } from '../types/types';
 
 interface ProductsResponse {
     success: boolean;
@@ -24,7 +24,7 @@ export interface ProductResponse {
 
 export interface CartResponse {
   success: boolean;
-  data: CartItem[];
+  data: CartItems[];
 }
 
 const ProductsService = {
@@ -36,7 +36,7 @@ const ProductsService = {
     addToCart: (item: CartItem) => api.post('/cart/add', item),
     getCart: () => api.get<CartResponse>('/cart'),
     removeCartItem: (id: string) => api.delete(`/cart/delete-cart/${id}`),
-    updateCartItem: (item: CartItem) => api.patch('/cart/update-cart', item),
+    updateCartItem: (item: CartItems) => api.patch('/cart/update-cart', item),
 
     // Wishlist
     addToWishList: (item: WishlistItem) => api.post('/wishlist', item),

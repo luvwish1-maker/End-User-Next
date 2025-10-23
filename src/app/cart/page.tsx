@@ -2,18 +2,18 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { CartItem } from "../types/types";
+import { CartItems } from "../types/types";
 import styles from "./styles/page.module.css";
 import ProductsService from "../services/productService";
+import { BsX } from "react-icons/bs";
 
 export default function Cart() {
-    const [cartItems, setCartItems] = useState<CartItem[]>([]);
+    const [cartItems, setCartItems] = useState<CartItems[]>([]);
     const [loading, setLoading] = useState(true);
 
-    // Fetch cart items
     const fetchCart = async () => {
         try {
-            const response = await ProductsService.getCart();            
+            const response = await ProductsService.getCart();
             setCartItems(response.data.data);
         } catch (error) {
             console.error("Error fetching cart", error);
@@ -26,7 +26,7 @@ export default function Cart() {
         fetchCart();
     }, []);
 
-    const handleQuantityChange = async (item: CartItem, change: number) => {
+    const handleQuantityChange = async (item: CartItems, change: number) => {
         const newQuantity = item.quantity + change;
         if (newQuantity < 1) return;
 
@@ -47,8 +47,6 @@ export default function Cart() {
         }
     };
 
-    console.log(cartItems);
-
     const subtotal = cartItems.reduce((acc, item) => acc + item.product.discountedPrice * item.quantity, 0);
     const totalSavings = cartItems.reduce(
         (acc, item) => acc + (item.product.actualPrice - item.product.discountedPrice) * item.quantity,
@@ -65,43 +63,42 @@ export default function Cart() {
             </div>
 
             <div className={styles.content}>
-                {/* Left Section - Cart Items */}
                 <div className={styles.left}>
                     {cartItems.map((item) => (
                         <div key={item.id} className={styles.cartItem}>
                             <div className={styles.imageWrapper}>
                                 <Image
-                                    src={item.product.images.find(img => img.isMain)?.url || ''} // ✅ main image
+                                    src={item.product.images.find(img => img.isMain)?.url || ''}
                                     alt={item.product.name}
-                                    width={100}
-                                    height={100}
+                                    width={128}
+                                    height={144}
                                     className={styles.productImage}
                                 />
                             </div>
+
                             <div className={styles.details}>
                                 <h4>{item.product.name}</h4>
                                 <p>{item.product.description}</p>
-                                <p className={styles.price}>
-                                    ₹{item.product.discountedPrice}{" "}
-                                    <span className={styles.originalPrice}>₹{item.product.actualPrice}</span>
-                                </p>
-                                <p className={styles.savings}>
+                                <div className={styles.priceRow}>
+                                    <span className={styles.discountedPrice}>₹{item.product.discountedPrice}</span>
+                                    <span className={styles.actualPrice}>₹{item.product.actualPrice}</span>
+                                </div>
+                                <span className={styles.savings}>
                                     You save ₹{item.product.actualPrice - item.product.discountedPrice}
-                                </p>
+                                </span>
+
+                                <BsX className={styles.closeIcon} onClick={() => handleRemoveItem(item.id)} />
+
                                 <div className={styles.quantityControl}>
                                     <button onClick={() => handleQuantityChange(item, -1)}>-</button>
                                     <span>{item.quantity}</span>
                                     <button onClick={() => handleQuantityChange(item, 1)}>+</button>
                                 </div>
-                                <button className={styles.removeBtn} onClick={() => handleRemoveItem(item.id)}>
-                                    ×
-                                </button>
                             </div>
                         </div>
                     ))}
                 </div>
 
-                {/* Right Section - Order Summary */}
                 <div className={styles.right}>
                     <h4>Order Summary</h4>
                     <div className={styles.summaryItem}>
