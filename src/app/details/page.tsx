@@ -1,20 +1,22 @@
-"use client";
+"use client"
 
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Image from "next/image";
+import { BsStarFill, BsTruck, BsShield, BsArrowRepeat, BsLock } from "react-icons/bs";
 import { Product } from "@/app/types/types";
 import ProductsService from "../services/productService";
+import styles from "./styles/page.module.css";
 
 export default function Details() {
     const searchParams = useSearchParams();
     const id = searchParams.get("id");
     const [product, setProduct] = useState<Product | null>(null);
     const [loading, setLoading] = useState(true);
+    const [quantity, setQuantity] = useState(1);
 
     useEffect(() => {
         if (!id) return;
-
         const fetchProduct = async () => {
             try {
                 const response = await ProductsService.getProductByID(id);
@@ -25,53 +27,115 @@ export default function Details() {
                 setLoading(false);
             }
         };
-
         fetchProduct();
     }, [id]);
 
-    if (loading) return <p className="text-center my-5">Loading...</p>;
-    if (!product) return <p className="text-center my-5">Product not found.</p>;
+    if (loading) return <p className={styles.center}>Loading...</p>;
+    if (!product) return <p className={styles.center}>Product not found.</p>;
 
     const mainImage = product.images?.find((img) => img.isMain)?.url || "";
 
     return (
-        <div className="container my-5">
-            <div className="row align-items-center g-5">
-                <div className="col-md-6 text-center">
+        <div className={`container ${styles.detailsContainer}`}>
+            <div className={styles.productLayout}>
+                {/* Left: Image */}
+                <div className={styles.imageSection}>
                     {mainImage && (
-                        <div className="position-relative mx-auto" style={{ width: "100%", maxWidth: "450px" }}>
-                            <Image
-                                src={mainImage}
-                                alt={product.name}
-                                width={450}
-                                height={450}
-                                priority
-                                className="rounded shadow-sm img-fluid"
-                                style={{ objectFit: "cover" }}
-                            />
-                        </div>
+                        <Image
+                            src={mainImage}
+                            alt={product.name}
+                            width={500}
+                            height={500}
+                            className={styles.productImage}
+                        />
                     )}
                 </div>
 
-                <div className="col-md-6">
-                    <h2 className="mb-3">{product.name}</h2>
-                    <p className="text-muted mb-1">Category: {product.categoryName}</p>
+                {/* Right: Info */}
+                <div className={styles.infoSection}>
+                    <h2 className={styles.title}>{product.name}</h2>
 
-                    <p>
-                        <span className="text-danger fs-4 fw-bold">
-                            ₹{product.discountedPrice}
-                        </span>{" "}
-                        <del className="text-secondary">₹{product.actualPrice}</del>
+                    {/* Stars / Reviews */}
+                    <div className={styles.stars}>
+                        {[...Array(5)].map((_, i) => (
+                            <BsStarFill key={i} color="#FFD700" size={20} />
+                        ))}
+                        <p>4.9(3,847 reviews)</p>
+                    </div>
+
+                    {/* Description */}
+                    <p className={styles.description}>{product.description}</p>
+
+                    {/* Quantity Block */}
+                    <div className={styles.quantityBlock}>
+                        <label>Quantity:</label>
+                        <div className={styles.quantityControl}>
+                            <button
+                                onClick={() => setQuantity((q) => Math.max(1, q - 1))}
+                                className={styles.qtyBtn}
+                            >
+                                -
+                            </button>
+                            <span>{quantity}</span>
+                            <button
+                                onClick={() => setQuantity((q) => q + 1)}
+                                className={styles.qtyBtn}
+                            >
+                                +
+                            </button>
+                        </div>
+                    </div>
+
+                    {/* Buttons: Add to Cart / Buy Now in separate columns */}
+                    <div className={styles.buttonColumn}>
+                        <button className={styles.addToCart}>Add to Cart</button>
+                    </div>
+                    <div className={styles.buttonColumn}>
+                        <button className={styles.buyNow}>Buy Now</button>
+                    </div>
+
+                    {/* Subscribe & Save */}
+                    <p className={styles.subscribe}>Subscribe & Save 10%</p>
+
+                    {/* Icons with labels */}
+                    <div className={styles.iconRow}>
+                        <div className={styles.iconItem}>
+                            <span><BsTruck /></span>
+                            <span>Fast Delivery</span>
+                        </div>
+                        <div className={styles.iconItem}>
+                            <span><BsShield /></span>
+                            <span>Secure Payment</span>
+                        </div>
+                        <div className={styles.iconItem}>
+                            <span><BsArrowRepeat /></span>
+                            <span>Easy Returns</span>
+                        </div>
+                        <div className={styles.iconItem}>
+                            <span><BsLock /></span>
+                            <span>Top Rated</span>
+                        </div>
+                    </div>
+
+                    {/* Available Offers */}
+                    <div className={styles.offersSection}>
+                        <h4>Available Offers</h4>
+                        <ul>
+                            <li>10% off on first purchase</li>
+                            <li>Buy 2 get 1 free</li>
+                            <li>Free shipping on orders over ₹999</li>
+                        </ul>
+                    </div>
+
+                    {/* Stock */}
+                    <p
+                        className={`${styles.stockStatus} ${product.isStock ? styles.inStock : styles.outOfStock
+                            }`}
+                    >
+                        {product.isStock
+                            ? `In Stock (${product.stockCount} available)`
+                            : "Out of Stock"}
                     </p>
-
-                    <p>{product.description}</p>
-
-                    <p className={`fw-semibold ${product.isStock ? "text-success" : "text-danger"}`}>
-                        {product.isStock ? `In Stock (${product.stockCount} available)` : "Out of Stock"}
-                    </p>
-
-                    <button className="btn btn-primary me-3">Add to Cart</button>
-                    <button className="btn btn-outline-danger">Add to Wishlist</button>
                 </div>
             </div>
         </div>
