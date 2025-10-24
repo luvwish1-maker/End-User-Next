@@ -6,7 +6,7 @@ import { CartItems } from "../types/types";
 import styles from "./styles/page.module.css";
 import ProductsService from "../services/productService";
 import { BsX } from "react-icons/bs";
-import { BsShield, BsArrowRepeat, BsRepeat } from "react-icons/bs";
+import { BsShield, BsArrowRepeat, BsRepeat, BsTag  } from "react-icons/bs";
 
 export default function Cart() {
     const [cartItems, setCartItems] = useState<CartItems[]>([]);
@@ -99,6 +99,31 @@ export default function Cart() {
                             </div>
                         </div>
                     ))}
+                    <div className={styles.couponSection}>
+                        <h5 className={styles.couponHeading}>
+                            <span className={styles.couponIcon}><BsTag /> </span> Apply Coupon
+                        </h5>
+                        <div className={styles.couponInputRow}>
+                            <input
+                                type="text"
+                                placeholder="Enter coupon code"
+                                className={styles.couponInput}
+                            />
+                            <button className={styles.couponApplyBtn}>Apply</button>
+                        </div>
+
+                        <hr className={styles.couponDivider} />
+
+                        <p className={styles.availableCoupons}>Available Coupons:</p>
+
+                        <div className={styles.availableCouponBox}>
+                            <div>
+                                <p className={styles.couponCode}>SAVE10</p>
+                                <p className={styles.couponDescription}>Get ₹130 off on orders above ₹999</p>
+                            </div>
+                            <button className={styles.couponSmallBtn}>APPLY</button>
+                        </div>
+                    </div>
                 </div>
 
                 <div className={styles.right}>
@@ -122,7 +147,7 @@ export default function Cart() {
                     </div>
                     <button className={styles.addToCartBtn}>Add to cart</button>
                     <button className={styles.buyNowBtn}>Buy Now</button>
-                    <p className={styles.subInfoSub}><BsRepeat color="#A31157" size={15}/> Subscribe & Save 10%</p>
+                    <p className={styles.subInfoSub}><BsRepeat color="#A31157" size={15} /> Subscribe & Save 10%</p>
                     <p className={styles.subInfo}><BsShield color="#A31157" size={15} /> Secure Checkout</p>
                     <p className={styles.subInfo}><BsArrowRepeat color="#A31157" size={15} /> Easy 30-day Returns</p>
                 </div>
