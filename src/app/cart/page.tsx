@@ -92,9 +92,9 @@ export default function Cart() {
                                 <BsX className={styles.closeIcon} onClick={() => handleRemoveItem(item.id)} />
 
                                 <div className={styles.quantityControl}>
-                                    <button onClick={() => handleQuantityChange(item, -1)}>-</button>
+                                    <button className={styles.qtyBtn} onClick={() => handleQuantityChange(item, -1)}>-</button>
                                     <span className={styles.quantityn}>{item.quantity}</span>
-                                    <button onClick={() => handleQuantityChange(item, 1)}>+</button>
+                                    <button className={styles.qtyBtn} onClick={() => handleQuantityChange(item, 1)}>+</button>
                                 </div>
                             </div>
                         </div>

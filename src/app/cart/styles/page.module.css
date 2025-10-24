@@ -162,7 +162,13 @@
     border-radius: 4px;
 }
 
-.quantityn{
+.qtyBtn:hover {
+    background: #c61469;
+    border-color: #c61469;
+    color: #fff;
+}
+
+.quantityn {
     color: #0F0F12;
 }
 
@@ -348,6 +354,10 @@
     cursor: pointer;
 }
 
+.addToCartBtn:hover {
+    background: #f00476;
+}
+
 .buyNowBtn {
     width: 100%;
     padding: 10px;
@@ -357,6 +367,11 @@
     border-radius: 25px;
     margin-top: 10px;
     cursor: pointer;
+}
+
+.buyNowBtn:hover {
+    background: #C61469;
+    color: #fff;
 }
 
 .subInfoSub {
