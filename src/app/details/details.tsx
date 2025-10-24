@@ -109,7 +109,7 @@ export default function Details() {
                                 src={mainImage}
                                 alt={product.name}
                                 width={500}
-                                height={500}
+                                height={400}
                                 className={styles.productImage}
                             />
                         )}
