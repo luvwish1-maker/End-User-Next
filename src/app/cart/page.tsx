@@ -11,6 +11,7 @@ import { BsShield, BsArrowRepeat, BsRepeat, BsTag } from "react-icons/bs";
 export default function Cart() {
     const [cartItems, setCartItems] = useState<CartItems[]>([]);
     const [loading, setLoading] = useState(true);
+    const [loadingItemId, setLoadingItemId] = useState<string | null>(null);
 
     const fetchCart = async () => {
         try {
@@ -31,6 +32,8 @@ export default function Cart() {
         const newQuantity = item.quantity + change;
         if (newQuantity < 1) return;
 
+        setLoadingItemId(item.id);
+
         try {
             await ProductsService.updateCartItem({
                 productId: item.product.id,
@@ -39,6 +42,8 @@ export default function Cart() {
             fetchCart();
         } catch (error) {
             console.error("Error updating cart item", error);
+        } finally {
+            setLoadingItemId(null);
         }
     };
 
@@ -70,6 +75,12 @@ export default function Cart() {
                 <div className={styles.left}>
                     {cartItems.map((item) => (
                         <div key={item.id} className={styles.cartItem}>
+                            {loadingItemId === item.id && (
+                                <div className={styles.itemLoaderOverlay}>
+                                    <div className={styles.loader}></div>
+                                </div>
+                            )}
+
                             <div className={styles.imageWrapper}>
                                 <Image
                                     src={item.product.images.find(img => img.isMain)?.url || ''}
@@ -133,11 +144,11 @@ export default function Cart() {
                     <h4>Order Summary</h4>
                     <div className={styles.summaryItem}>
                         <span className={styles.subtotaln}>Subtotal ({cartItems.length} items)</span>
-                        <span className={styles.subtotalA}>₹{subtotal}</span>
+                        <span className={styles.subtotalA}>₹{subtotal.toFixed(2)}</span>
                     </div>
                     <div className={styles.summaryItem}>
                         <span className={styles.proSavingsN}>Product Savings</span>
-                        <span className={styles.proSavingsN}>-₹{totalSavings}</span>
+                        <span className={styles.proSavingsN}>-₹{totalSavings.toFixed(2)}</span>
                     </div>
                     <div className={styles.summaryItem}>
                         <span className={styles.subtotaln}>Delivery Fee</span>
@@ -146,7 +157,7 @@ export default function Cart() {
                     <hr />
                     <div className={styles.total}>
                         <span className={styles.totalN}>Total Amount</span>
-                        <span className={styles.totalA}>₹{subtotal}</span>
+                        <span className={styles.totalA}>₹{subtotal.toFixed(2)}</span>
                     </div>
                     <button className={styles.addToCartBtn}>Add to cart</button>
                     <button className={styles.buyNowBtn}>Buy Now</button>

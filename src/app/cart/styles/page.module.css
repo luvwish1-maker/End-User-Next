@@ -43,6 +43,32 @@
     gap: 20px;
 }
 
+.itemLoaderOverlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 16px;
+    z-index: 5;
+}
+
+.loader {
+    width: 24px;
+    height: 24px;
+    border: 3px solid #C61469;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 .cartItem {
     width: 842.67px;
     height: 193.66px;
