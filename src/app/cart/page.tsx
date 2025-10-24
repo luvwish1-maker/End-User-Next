@@ -7,11 +7,14 @@ import styles from "./styles/page.module.css";
 import ProductsService from "../services/productService";
 import { BsX } from "react-icons/bs";
 import { BsShield, BsArrowRepeat, BsRepeat, BsTag } from "react-icons/bs";
+import { useAlert } from "@/components/alert/alertProvider";
+import { AxiosError } from "axios";
 
 export default function Cart() {
     const [cartItems, setCartItems] = useState<CartItems[]>([]);
     const [loading, setLoading] = useState(true);
     const [loadingItemId, setLoadingItemId] = useState<string | null>(null);
+    const { showAlert } = useAlert();
 
     const fetchCart = async () => {
         try {
@@ -39,9 +42,30 @@ export default function Cart() {
                 productId: item.product.id,
                 quantity: newQuantity
             });
+            showAlert({
+                message: "Quantity updated successfully!",
+                type: "success",
+                autoDismiss: true,
+                duration: 2500,
+            });
             fetchCart();
         } catch (error) {
-            console.error("Error updating cart item", error);
+            let message = "An unexpected error occurred";
+
+            if (error instanceof AxiosError) {
+                const backendMessage = error.response?.data?.message;
+                if (typeof backendMessage === "string") {
+                    message = backendMessage;
+                }
+            } else if (error instanceof Error) {
+                message = error.message;
+            }
+            showAlert({
+                message,
+                type: "error",
+                autoDismiss: true,
+                duration: 3000,
+            });
         } finally {
             setLoadingItemId(null);
         }
@@ -50,8 +74,20 @@ export default function Cart() {
     const handleRemoveItem = async (id: string) => {
         try {
             await ProductsService.removeCartItem(id);
+            showAlert({
+                message: "Item removed from cart",
+                type: "info",
+                autoDismiss: true,
+                duration: 2500,
+            });
             fetchCart();
         } catch (error) {
+            showAlert({
+                message: "Error removing item",
+                type: "error",
+                autoDismiss: true,
+                duration: 3000,
+            });
             console.error("Error removing cart item", error);
         }
     };
@@ -159,7 +195,7 @@ export default function Cart() {
                         <span className={styles.totalN}>Total Amount</span>
                         <span className={styles.totalA}>₹{subtotal.toFixed(2)}</span>
                     </div>
-                    <button className={styles.addToCartBtn}>Add to cart</button>
+                    {/* <button className={styles.addToCartBtn}>Add to cart</button> */}
                     <button className={styles.buyNowBtn}>Buy Now</button>
                     <p className={styles.subInfoSub}><BsRepeat color="#A31157" size={15} /> Subscribe & Save 10%</p>
                     <p className={styles.subInfo}><BsShield color="#A31157" size={15} /> Secure Checkout</p>
