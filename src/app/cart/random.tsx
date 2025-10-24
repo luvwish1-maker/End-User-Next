@@ -24,7 +24,7 @@ export default function Random() {
                 const response = await ProductsService.getProducts({ page: 1, limit: 50 });
                 const allProducts = response.data.data.data;
                 // Get 6 random products
-                const randomSix = allProducts.sort(() => 0.5 - Math.random()).slice(0, 6);
+                const randomSix = allProducts.sort(() => 0.5 - Math.random()).slice(0, 8);
                 setProducts(randomSix);
             } catch (error) {
                 console.error("Failed to fetch random products:", error);
