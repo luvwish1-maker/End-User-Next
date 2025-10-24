@@ -33,7 +33,7 @@ export default function Cart() {
         }
 
         fetchCart();
-    },[router, showAlert]);
+    }, [router, showAlert]);
 
     const fetchCart = async () => {
         try {
@@ -117,7 +117,12 @@ export default function Cart() {
         0
     );
 
-    if (loading) return <p>Loading cart...</p>;
+    if (loading)
+        return (
+            <div className={styles.loaderWrapper}>
+                <div className={styles.loaderCom}></div>
+            </div>
+        );
 
     return (
         <div className={styles.container}>

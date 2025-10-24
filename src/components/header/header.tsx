@@ -60,7 +60,7 @@ export default function Header() {
         });
     };
 
-        const goToCart = () => {
+    const goToCart = () => {
         router.push("/cart");
     };
 
