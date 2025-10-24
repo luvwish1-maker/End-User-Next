@@ -177,7 +177,8 @@
     display: flex;
     align-items: center;
     font-family: Poppins;
-    font-weight: 500;
+    font-weight: 400;
+    line-height: 28px;
     font-size: 18px;
     color: #0F0F12;
     margin-bottom: 15px;
@@ -199,18 +200,19 @@
 .couponInput {
     flex: 1;
     padding: 10px 12px;
-    border: 1px solid #E5E5E5;
+    border: 1px none #E5E5E5;
     border-radius: 8px;
     font-size: 14px;
     outline: none;
+    background-color: #9999992c;
 }
 
 .couponApplyBtn {
     padding: 8px 18px;
-    background-color: #fff;
+    background-color: #FFF8FB;
     color: #C61469;
     border: 1px solid #C61469;
-    border-radius: 20px;
+    border-radius: 12px;
     font-weight: 500;
     cursor: pointer;
     transition: 0.2s;
@@ -232,13 +234,15 @@
     font-size: 14px;
     color: #6B6B76;
     margin-bottom: 10px;
+    line-height: 20px;
+    font-weight: 400;
 }
 
 .availableCouponBox {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border: 1px solid #FFE5EF;
+    border: 1px solid #FFCCE0;
     border-radius: 12px;
     padding: 12px 16px;
     background-color: #fff;
