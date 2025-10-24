@@ -36,6 +36,7 @@ export default function Header() {
                 autoDismiss: true,
                 duration: 3000,
             });
+            router.push("/");
         }
     };
 

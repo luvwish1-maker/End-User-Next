@@ -9,12 +9,31 @@ import { BsX } from "react-icons/bs";
 import { BsShield, BsArrowRepeat, BsRepeat, BsTag } from "react-icons/bs";
 import { useAlert } from "@/components/alert/alertProvider";
 import { AxiosError } from "axios";
+import { useRouter } from "next/navigation";
+import { authService } from "../services/authService";
 
 export default function Cart() {
+    const router = useRouter();
     const [cartItems, setCartItems] = useState<CartItems[]>([]);
     const [loading, setLoading] = useState(true);
     const [loadingItemId, setLoadingItemId] = useState<string | null>(null);
     const { showAlert } = useAlert();
+
+    useEffect(() => {
+        // ✅ Check if user is logged in
+        if (!authService.isLoggedIn()) {
+            showAlert({
+                message: "Please log in first!",
+                type: "error",
+                autoDismiss: true,
+                duration: 3000,
+            });
+            router.push("/");
+            return;
+        }
+
+        fetchCart();
+    },[router, showAlert]);
 
     const fetchCart = async () => {
         try {
