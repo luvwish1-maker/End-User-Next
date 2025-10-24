@@ -159,7 +159,6 @@ export default function Cart() {
                                 <div className={styles.details}>
                                     <h4>{item.product.name}</h4>
                                     <p>{item.product.description}</p>
-                                    <span className={styles.stockBadge}>In Stock</span>
                                     <div className={styles.priceRow}>
                                         <span className={styles.discountedPrice}>₹{item.product.discountedPrice}</span>
                                         <span className={styles.actualPrice}>₹{item.product.actualPrice}</span>
@@ -167,6 +166,7 @@ export default function Cart() {
                                     <span className={styles.savings}>
                                         You save ₹{(item.product.actualPrice - item.product.discountedPrice).toFixed(2)}
                                     </span>
+                                    <span className={styles.stockBadge}>In Stock</span>
 
                                     <BsX className={styles.closeIcon} onClick={() => handleRemoveItem(item.id)} />
 
@@ -233,14 +233,14 @@ export default function Cart() {
                 </div>
             </div>
 
-            <Solution/>
+            <Solution />
 
             <div className={styles.countsWrapper}>
                 <Counts />
             </div>
 
             <Test />
-            <Subscribe/>
+            <Subscribe />
         </>
     );
 }
