@@ -19,10 +19,10 @@ export default function Products() {
     const [products, setProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
-    const [page, setPage] = useState(1);
     const { isLoggedIn, login } = useAuth();
     const [showLoginModal, setShowLoginModal] = useState(false);
     const limit = 10;
+    const page = 1;
 
     const { showAlert } = useAlert();
     const sliderRef = useRef<Slider | null>(null);
