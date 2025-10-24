@@ -15,6 +15,7 @@ import Solution from "../shared/solution";
 import Counts from "../shared/counts";
 import Test from "../shared/test";
 import Subscribe from "../shared/subscribe";
+import Random from "./random";
 
 export default function Cart() {
     const router = useRouter();
@@ -232,6 +233,8 @@ export default function Cart() {
                     </div>
                 </div>
             </div>
+
+            <Random/>
 
             <Solution />
 
