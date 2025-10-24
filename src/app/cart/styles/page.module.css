@@ -84,6 +84,7 @@
     0% {
         transform: rotate(0deg);
     }
+
     100% {
         transform: rotate(360deg);
     }
@@ -440,4 +441,9 @@
     margin-top: 5px;
     margin-bottom: 10px;
     text-align: center;
+}
+
+.countsWrapper {
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
