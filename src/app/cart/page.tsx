@@ -165,7 +165,7 @@ export default function Cart() {
                                         <span className={styles.actualPrice}>₹{item.product.actualPrice}</span>
                                     </div>
                                     <span className={styles.savings}>
-                                        You save ₹{item.product.actualPrice - item.product.discountedPrice}
+                                        You save ₹{(item.product.actualPrice - item.product.discountedPrice).toFixed(2)}
                                     </span>
 
                                     <BsX className={styles.closeIcon} onClick={() => handleRemoveItem(item.id)} />
