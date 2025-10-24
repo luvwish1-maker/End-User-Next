@@ -37,6 +37,11 @@ export interface CartItems {
     id: string;
 }
 
+export interface UpdateCartPayload {
+  productId: string;
+  quantity: number;
+}
+
 export interface WishlistItem {
     productId: string;
 }

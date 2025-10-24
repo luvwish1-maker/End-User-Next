@@ -6,7 +6,7 @@ import { CartItems } from "../types/types";
 import styles from "./styles/page.module.css";
 import ProductsService from "../services/productService";
 import { BsX } from "react-icons/bs";
-import { BsShield, BsArrowRepeat, BsRepeat, BsTag  } from "react-icons/bs";
+import { BsShield, BsArrowRepeat, BsRepeat, BsTag } from "react-icons/bs";
 
 export default function Cart() {
     const [cartItems, setCartItems] = useState<CartItems[]>([]);
@@ -32,7 +32,10 @@ export default function Cart() {
         if (newQuantity < 1) return;
 
         try {
-            await ProductsService.updateCartItem({ ...item, quantity: newQuantity });
+            await ProductsService.updateCartItem({
+                productId: item.product.id,
+                quantity: newQuantity
+            });
             fetchCart();
         } catch (error) {
             console.error("Error updating cart item", error);
