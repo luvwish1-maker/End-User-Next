@@ -20,6 +20,7 @@ import Random from "./random";
 export default function Cart() {
     const router = useRouter();
     const [cartItems, setCartItems] = useState<CartItems[]>([]);
+    const [totalAmount, setTotalAmount] = useState<number>(0);
     const [loading, setLoading] = useState(true);
     const [loadingItemId, setLoadingItemId] = useState<string | null>(null);
     const { showAlert } = useAlert();
@@ -43,7 +44,9 @@ export default function Cart() {
     const fetchCart = async () => {
         try {
             const response = await ProductsService.getCart();
-            setCartItems(response.data.data);
+            const cartData = response.data.data;
+            setCartItems(cartData.items || []);
+            setTotalAmount(cartData.totalAmount || 0);
         } catch (error) {
             console.error("Error fetching cart", error);
         } finally {
@@ -116,7 +119,7 @@ export default function Cart() {
         }
     };
 
-    const subtotal = cartItems.reduce((acc, item) => acc + item.product.discountedPrice * item.quantity, 0);
+    const subtotal = totalAmount
     const totalSavings = cartItems.reduce(
         (acc, item) => acc + (item.product.actualPrice - item.product.discountedPrice) * item.quantity,
         0
@@ -234,7 +237,7 @@ export default function Cart() {
                 </div>
             </div>
 
-            <Random/>
+            <Random />
 
             <Solution />
 

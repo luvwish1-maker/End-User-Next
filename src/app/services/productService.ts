@@ -24,7 +24,16 @@ export interface ProductResponse {
 
 export interface CartResponse {
   success: boolean;
-  data: CartItems[];
+  data: {
+    items: CartItems[];
+    totalAmount: number;
+    pagination: {
+      page: number;
+      limit: number;
+      totalCount: number;
+      totalPages: number;
+    };
+  };
 }
 
 const ProductsService = {
