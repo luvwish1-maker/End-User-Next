@@ -64,6 +64,10 @@ export default function Header() {
         router.push("/cart");
     };
 
+    const goToProfile = () => {
+        router.push("/profile");
+    };
+
     return (
         <header className={styles.mainHeader}>
             {/* 🔹 Top banner */}
@@ -102,7 +106,7 @@ export default function Header() {
                         {isLoggedIn && isMobile && (
                             <ul className={styles.mobileUserIcons}>
                                 <li><BsHeart /></li>
-                                <li><BsPerson /></li>
+                                <li onClick={goToProfile} style={{ cursor: "pointer" }}><BsPerson /></li>
                                 <li onClick={goToCart} style={{ cursor: "pointer" }}><BsBag /></li>
                                 <li title="Logout">
                                     <button onClick={handleLogout}>
@@ -127,7 +131,7 @@ export default function Header() {
                             ) : (
                                 <ul className={styles.userIcons}>
                                     <li title="Wishlist"><BsHeart /></li>
-                                    <li title="Profile"><BsPerson /></li>
+                                    <li onClick={goToProfile} style={{ cursor: "pointer" }} title="Profile"><BsPerson /></li>
                                     <li onClick={goToCart} style={{ cursor: "pointer" }} title="Cart"><BsBag /></li>
                                     <li title="Logout">
                                         <button onClick={handleLogout}>

@@ -1,0 +1,109 @@
+.container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profileCard {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.details {
+    flex: 1;
+}
+
+.field {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.input {
+    flex: 1;
+    padding: 6px 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+}
+
+.editBtn,
+.saveBtn,
+.cancelBtn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.editBtn {
+    background-color: #a31157;
+    color: #fff;
+    margin-top: 10px;
+}
+
+.saveBtn {
+    background-color: #a31157;
+    color: #fff;
+}
+
+.cancelBtn {
+    background-color: #ccc;
+    color: #000;
+}
+
+.btnGroup {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.spinnerContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    color: #a31157;
+}
+
+.spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #a31157;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 10px;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loading,
+.error {
+    text-align: center;
+    font-size: 16px;
+    color: gray;
+}
