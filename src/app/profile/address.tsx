@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import styles from "./styles/address.module.css";
 import ProfileService from "../services/profileService";
 import { Address } from "../types/profile";
-import { BsTrash, BsPencilSquare, BsPlusLg } from "react-icons/bs";
+import { BsTrash, BsPencilSquare, BsPlusLg, BsTelephone } from "react-icons/bs";
+import { LiaLandmarkSolid } from "react-icons/lia";
 import { useAlert } from "@/components/alert/alertProvider";
 import { AxiosError } from "axios";
 
@@ -12,12 +13,15 @@ export default function AddressPage() {
     const [addresses, setAddresses] = useState<Address[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
-    const [isEditing, setIsEditing] = useState<boolean>(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isEditing, setIsEditing] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const [editAddress, setEditAddress] = useState<Partial<Address> | null>(null);
     const [form, setForm] = useState<Partial<Address>>({});
     const { showAlert } = useAlert();
 
-    const fetchAddresses = async () => {
+    // ✅ useCallback to fix eslint warning
+    const fetchAddresses = useCallback(async () => {
         try {
             const response = await ProfileService.getAddresses();
             setAddresses(response.data.data);
@@ -33,11 +37,11 @@ export default function AddressPage() {
         } finally {
             setLoading(false);
         }
-    };
+    }, [showAlert]);
 
     useEffect(() => {
         fetchAddresses();
-    }, []);
+    }, [fetchAddresses]);
 
     const handleDelete = async (id: string) => {
         try {
@@ -61,6 +65,7 @@ export default function AddressPage() {
     };
 
     const handleAddOrUpdate = async () => {
+        setIsSubmitting(true);
         try {
             if (isEditing && editAddress?.id) {
                 await ProfileService.updateAddress(editAddress.id, form);
@@ -82,6 +87,7 @@ export default function AddressPage() {
             setForm({});
             setIsEditing(false);
             setEditAddress(null);
+            setIsModalOpen(false);
             fetchAddresses();
         } catch (error: unknown) {
             let message = "Failed to save address";
@@ -91,6 +97,8 @@ export default function AddressPage() {
                 message = error.message;
             }
             showAlert({ message, type: "error", autoDismiss: true, duration: 3000 });
+        } finally {
+            setIsSubmitting(false);
         }
     };
 
@@ -98,6 +106,7 @@ export default function AddressPage() {
         setIsEditing(true);
         setEditAddress(address);
         setForm(address);
+        setIsModalOpen(true);
     };
 
     const handleChange = (
@@ -126,6 +135,7 @@ export default function AddressPage() {
                         setIsEditing(false);
                         setForm({});
                         setEditAddress(null);
+                        setIsModalOpen(true);
                     }}
                 >
                     <BsPlusLg /> Add Address
@@ -145,8 +155,8 @@ export default function AddressPage() {
                         <p>
                             {addr.city}, {addr.state}, {addr.country} - {addr.postalCode}
                         </p>
-                        <p>📞 {addr.phone}</p>
-                        {addr.landmark && <p>🏷 {addr.landmark}</p>}
+                        <p><BsTelephone /> {addr.phone}</p>
+                        {addr.landmark && <p><LiaLandmarkSolid /> {addr.landmark}</p>}
                         <div className={styles.actions}>
                             <button
                                 className={styles.iconButton}
@@ -165,71 +175,91 @@ export default function AddressPage() {
                 ))}
             </div>
 
-            {/* Add/Edit Form */}
-            <div className={styles.formContainer}>
-                <h4>{isEditing ? "Edit Address" : "Add Address"}</h4>
-                <div className={styles.formGrid}>
-                    <input
-                        type="text"
-                        name="name"
-                        placeholder="Full Name"
-                        value={form.name || ""}
-                        onChange={handleChange}
-                    />
-                    <input
-                        type="text"
-                        name="address"
-                        placeholder="Address"
-                        value={form.address || ""}
-                        onChange={handleChange}
-                    />
-                    <input
-                        type="text"
-                        name="city"
-                        placeholder="City"
-                        value={form.city || ""}
-                        onChange={handleChange}
-                    />
-                    <input
-                        type="text"
-                        name="state"
-                        placeholder="State"
-                        value={form.state || ""}
-                        onChange={handleChange}
-                    />
-                    <input
-                        type="text"
-                        name="country"
-                        placeholder="Country"
-                        value={form.country || ""}
-                        onChange={handleChange}
-                    />
-                    <input
-                        type="text"
-                        name="postalCode"
-                        placeholder="Postal Code"
-                        value={form.postalCode || ""}
-                        onChange={handleChange}
-                    />
-                    <input
-                        type="text"
-                        name="phone"
-                        placeholder="Phone Number"
-                        value={form.phone || ""}
-                        onChange={handleChange}
-                    />
-                    <input
-                        type="text"
-                        name="landmark"
-                        placeholder="Landmark (optional)"
-                        value={form.landmark || ""}
-                        onChange={handleChange}
-                    />
+            {/* ✅ Modal for Add/Edit */}
+            {isModalOpen && (
+                <div className={styles.modalOverlay}>
+                    <div className={styles.modal}>
+                        <h4>{isEditing ? "Edit Address" : "Add Address"}</h4>
+                        <div className={styles.formGrid}>
+                            <input
+                                type="text"
+                                name="name"
+                                placeholder="Full Name"
+                                value={form.name || ""}
+                                onChange={handleChange}
+                            />
+                            <input
+                                type="text"
+                                name="address"
+                                placeholder="Address"
+                                value={form.address || ""}
+                                onChange={handleChange}
+                            />
+                            <input
+                                type="text"
+                                name="city"
+                                placeholder="City"
+                                value={form.city || ""}
+                                onChange={handleChange}
+                            />
+                            <input
+                                type="text"
+                                name="state"
+                                placeholder="State"
+                                value={form.state || ""}
+                                onChange={handleChange}
+                            />
+                            <input
+                                type="text"
+                                name="country"
+                                placeholder="Country"
+                                value={form.country || ""}
+                                onChange={handleChange}
+                            />
+                            <input
+                                type="text"
+                                name="postalCode"
+                                placeholder="Postal Code"
+                                value={form.postalCode || ""}
+                                onChange={handleChange}
+                            />
+                            <input
+                                type="text"
+                                name="phone"
+                                placeholder="Phone Number"
+                                value={form.phone || ""}
+                                onChange={handleChange}
+                            />
+                            <input
+                                type="text"
+                                name="landmark"
+                                placeholder="Landmark (optional)"
+                                value={form.landmark || ""}
+                                onChange={handleChange}
+                            />
+                        </div>
+                        <div className={styles.modalActions}>
+                            <button
+                                className={styles.cancelButton}
+                                onClick={() => setIsModalOpen(false)}
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                className={styles.saveButton}
+                                onClick={handleAddOrUpdate}
+                                disabled={isSubmitting}
+                            >
+                                {isSubmitting
+                                    ? "Saving..."
+                                    : isEditing
+                                        ? "Update Address"
+                                        : "Add Address"}
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                <button className={styles.saveButton} onClick={handleAddOrUpdate}>
-                    {isEditing ? "Update Address" : "Add Address"}
-                </button>
-            </div>
+            )}
         </div>
     );
 }

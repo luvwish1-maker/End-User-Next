@@ -17,7 +17,18 @@ const ProfileService = {
 
     // 🔹 Addresses
     getAddresses: () => api.get<ApiResponse<Address[]>>('/addresses'),
-    addAddress: (payload: Address) => api.post<ApiResponse<Address>>('/addresses', payload),
+    addAddress: async (payload: Address) => {
+        // ✅ Fetch customer profile to attach ID
+        const profileRes = await ProfileService.getProfile();
+        const customerProfileId = profileRes.data.data?.id;
+
+        if (!customerProfileId) {
+            throw new Error("Customer profile ID not found.");
+        }
+
+        const finalPayload = { ...payload, customerProfileId };
+        return api.post<ApiResponse<Address>>('/addresses', finalPayload);
+    },
     updateAddress: (id: string, payload: Partial<Address>) =>
         api.patch<ApiResponse<Address>>(`/addresses/${id}`, payload),
     deleteAddress: (id: string) => api.delete<ApiResponse<unknown>>(`/addresses/${id}`),
