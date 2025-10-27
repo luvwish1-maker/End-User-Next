@@ -155,8 +155,8 @@ export default function AddressPage() {
                         <p>
                             {addr.city}, {addr.state}, {addr.country} - {addr.postalCode}
                         </p>
-                        <p><BsTelephone /> {addr.phone}</p>
-                        {addr.landmark && <p><LiaLandmarkSolid /> {addr.landmark}</p>}
+                        <p><BsTelephone className={styles.svg}/> {addr.phone}</p>
+                        {addr.landmark && <p><LiaLandmarkSolid className={styles.svg}/> {addr.landmark}</p>}
                         <div className={styles.actions}>
                             <button
                                 className={styles.iconButton}

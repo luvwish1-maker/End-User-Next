@@ -200,3 +200,10 @@
         transform: scale(1);
     }
 }
+
+.svg {
+    margin-right: 6px;
+    vertical-align: middle;
+    color: #a31157;
+    font-size: 1.1rem;
+}
