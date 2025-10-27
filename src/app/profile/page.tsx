@@ -5,6 +5,7 @@ import styles from "./styles/profile.module.css";
 import ProfileService from "../services/profileService";
 import { Profile } from "../types/profile";
 import { useAlert } from "@/components/alert/alertProvider"; // ✅ Import alert hook
+import AddressPage from "./address";
 
 export default function ProfilePage() {
     const [profile, setProfile] = useState<Profile | null>(null);
@@ -94,69 +95,74 @@ export default function ProfilePage() {
     const user = profile.CustomerProfile;
 
     return (
-        <div className={styles.container}>
-            <h2 className={styles.title}>My Profile</h2>
 
-            <div className={styles.profileCard}>
-                <div className={styles.details}>
-                    <div className={styles.field}>
-                        <strong>Name:</strong>
-                        {isEditing ? (
-                            <input
-                                type="text"
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
-                                className={styles.input}
-                            />
-                        ) : (
-                            <span>{user.name}</span>
-                        )}
-                    </div>
+        <>
+            <div className={styles.container}>
+                <h2 className={styles.title}>My Profile</h2>
 
-                    <div className={styles.field}>
-                        <strong>Email:</strong> <span>{profile.email}</span>
-                    </div>
-
-                    <div className={styles.field}>
-                        <strong>Phone:</strong>
-                        {isEditing ? (
-                            <input
-                                type="text"
-                                value={phone}
-                                onChange={(e) => setPhone(e.target.value)}
-                                className={styles.input}
-                            />
-                        ) : (
-                            <span>{user.phone}</span>
-                        )}
-                    </div>
-
-                    {isEditing ? (
-                        <div className={styles.btnGroup}>
-                            <button
-                                className={styles.saveBtn}
-                                onClick={handleSave}
-                                disabled={saving}
-                            >
-                                {saving ? "Saving..." : "Save"}
-                            </button>
-                            <button
-                                className={styles.cancelBtn}
-                                onClick={() => setIsEditing(false)}
-                            >
-                                Cancel
-                            </button>
+                <div className={styles.profileCard}>
+                    <div className={styles.details}>
+                        <div className={styles.field}>
+                            <strong>Name:</strong>
+                            {isEditing ? (
+                                <input
+                                    type="text"
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
+                                    className={styles.input}
+                                />
+                            ) : (
+                                <span>{user.name}</span>
+                            )}
                         </div>
-                    ) : (
-                        <button
-                            className={styles.editBtn}
-                            onClick={() => setIsEditing(true)}
-                        >
-                            Edit Profile
-                        </button>
-                    )}
+
+                        <div className={styles.field}>
+                            <strong>Email:</strong> <span>{profile.email}</span>
+                        </div>
+
+                        <div className={styles.field}>
+                            <strong>Phone:</strong>
+                            {isEditing ? (
+                                <input
+                                    type="text"
+                                    value={phone}
+                                    onChange={(e) => setPhone(e.target.value)}
+                                    className={styles.input}
+                                />
+                            ) : (
+                                <span>{user.phone}</span>
+                            )}
+                        </div>
+
+                        {isEditing ? (
+                            <div className={styles.btnGroup}>
+                                <button
+                                    className={styles.saveBtn}
+                                    onClick={handleSave}
+                                    disabled={saving}
+                                >
+                                    {saving ? "Saving..." : "Save"}
+                                </button>
+                                <button
+                                    className={styles.cancelBtn}
+                                    onClick={() => setIsEditing(false)}
+                                >
+                                    Cancel
+                                </button>
+                            </div>
+                        ) : (
+                            <button
+                                className={styles.editBtn}
+                                onClick={() => setIsEditing(true)}
+                            >
+                                Edit Profile
+                            </button>
+                        )}
+                    </div>
                 </div>
             </div>
-        </div>
+            
+            <AddressPage />
+        </>
     );
 }
