@@ -29,8 +29,10 @@ const ProfileService = {
         const finalPayload = { ...payload, customerProfileId };
         return api.post<ApiResponse<Address>>('/addresses', finalPayload);
     },
-    updateAddress: (id: string, payload: Partial<Address>) =>
-        api.patch<ApiResponse<Address>>(`/addresses/${id}`, payload),
+    updateAddress: (id: string, payload: Partial<Address>) => {
+        const { id: _ignoredId, createdAt: _ignoredCreated, updatedAt: _ignoredUpdated, ...allowedPayload } = payload;
+        return api.patch<ApiResponse<Address>>(`/addresses/${id}`, allowedPayload);
+    },
     deleteAddress: (id: string) => api.delete<ApiResponse<unknown>>(`/addresses/${id}`),
 };
 
