@@ -7,6 +7,7 @@ import { Address } from "../types/profile";
 import { BsTrash, BsPencilSquare, BsPlusLg, BsTelephone } from "react-icons/bs";
 import { LiaLandmarkSolid } from "react-icons/lia";
 import { useAlert } from "@/components/alert/alertProvider";
+import { useConfirmation } from "@/components/confirmation/useConfirmation";
 import { AxiosError } from "axios";
 
 export default function AddressPage() {
@@ -19,8 +20,8 @@ export default function AddressPage() {
     const [editAddress, setEditAddress] = useState<Partial<Address> | null>(null);
     const [form, setForm] = useState<Partial<Address>>({});
     const { showAlert } = useAlert();
+    const { confirm, ConfirmationElement } = useConfirmation(); // ✅ added
 
-    // ✅ useCallback to fix eslint warning
     const fetchAddresses = useCallback(async () => {
         try {
             const response = await ProfileService.getAddresses();
@@ -43,7 +44,17 @@ export default function AddressPage() {
         fetchAddresses();
     }, [fetchAddresses]);
 
+    // ✅ Updated: confirmation before deleting
     const handleDelete = async (id: string) => {
+        const confirmed = await confirm({
+            title: "Delete Address",
+            message: "Are you sure you want to delete this address?",
+            confirmText: "Yes, Delete",
+            cancelText: "Cancel",
+        });
+
+        if (!confirmed) return;
+
         try {
             await ProfileService.deleteAddress(id);
             showAlert({
@@ -52,7 +63,7 @@ export default function AddressPage() {
                 autoDismiss: true,
                 duration: 2500,
             });
-            setAddresses(addresses.filter((a) => a.id !== id));
+            setAddresses((prev) => prev.filter((a) => a.id !== id));
         } catch (error: unknown) {
             let message = "Failed to delete address";
             if (error instanceof AxiosError) {
@@ -155,8 +166,14 @@ export default function AddressPage() {
                         <p>
                             {addr.city}, {addr.state}, {addr.country} - {addr.postalCode}
                         </p>
-                        <p><BsTelephone className={styles.svg}/> {addr.phone}</p>
-                        {addr.landmark && <p><LiaLandmarkSolid className={styles.svg}/> {addr.landmark}</p>}
+                        <p>
+                            <BsTelephone className={styles.svg} /> {addr.phone}
+                        </p>
+                        {addr.landmark && (
+                            <p>
+                                <LiaLandmarkSolid className={styles.svg} /> {addr.landmark}
+                            </p>
+                        )}
                         <div className={styles.actions}>
                             <button
                                 className={styles.iconButton}
@@ -260,6 +277,9 @@ export default function AddressPage() {
                     </div>
                 </div>
             )}
+
+            {/* ✅ Confirmation Modal element */}
+            {ConfirmationElement}
         </div>
     );
 }
