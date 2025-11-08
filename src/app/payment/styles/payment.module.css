@@ -230,6 +230,158 @@
   text-decoration: underline;
 }
 
+.right {
+  flex: 1;
+  border: 1px solid #FFE5EF;
+  padding: 20px;
+  border-radius: 10px;
+  height: fit-content;
+  min-width: 260px;
+  max-width: 400px;
+  margin: 0 auto;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+/* Responsive layout for order summary box */
+@media (max-width: 900px) {
+  .right {
+    max-width: 100%;
+    min-width: 0;
+    padding: 16px;
+    margin: 24px 8px;
+  }
+}
+
+@media (max-width: 600px) {
+  .right {
+    padding: 12px;
+    border-radius: 6px;
+    margin: 18px 0;
+    box-shadow: none;
+  }
+}
+
+.summaryItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+  gap: 2px;
+}
+.subtotaln,
+.subtotalA,
+.proSavingsN {
+  font-family: Inter, sans-serif;
+  line-height: 20px;
+  font-weight: 400;
+  font-size: 14px;
+}
+.subtotaln { color: #6B6B76; }
+.subtotalA { color: #0F0F12; }
+.proSavingsN { color: #1F8A5B; }
+.total {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  font-size: 16px;
+  margin-top: 8px;
+}
+.totalN,
+.totalA {
+  font-family: Poppins, sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 28px;
+}
+
+.totalN { color: #0F0F12; }
+.totalA { color: #A31157; }
+
+/* Responsive font sizes for summary on smaller screens */
+@media (max-width: 600px) {
+  .subtotaln,
+  .subtotalA,
+  .proSavingsN {
+    font-size: 13px;
+    line-height: 18px;
+  }
+  .total {
+    font-size: 15px;
+  }
+  .totalN,
+  .totalA {
+    font-size: 16px;
+    line-height: 22px;
+  }
+}
+
+/* Buy Now button responsiveness */
+.buyNowBtn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  background: transparent;
+  color: #C61469;
+  border: 1px solid #C61469;
+  transition: background 0.2s, color 0.2s;
+  box-sizing: border-box;
+}
+
+.buyNowBtn:disabled { opacity: 0.7; cursor: not-allowed; }
+.buyNowBtn:hover { background: #C61469; color: #fff; }
+
+@media (max-width: 600px) {
+  .buyNowBtn {
+    font-size: 14px;
+    padding: 10px;
+    border-radius: 6px;
+  }
+}
+
+.subInfoSub,
+.subInfo {
+  font-size: 12px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+.subInfoSub { color: #A31157; margin-top: 15px; }
+.subInfo { color: #6B6B76; }
+
+@media (max-width: 600px) {
+  .subInfoSub,
+  .subInfo {
+    font-size: 11px;
+    margin-top: 8px;
+    margin-bottom: 2px;
+  }
+}
+
+.errorMsg {
+  color: #d81b60;
+  font-size: 12px;
+  margin-bottom: 4px;
+  padding-left: 3px;
+}
+
+@media (max-width: 600px) {
+  .errorMsg {
+    font-size: 11px;
+    margin-bottom: 2px;
+    padding-left: 1px;
+  }
+}
+
 
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(-4px); }

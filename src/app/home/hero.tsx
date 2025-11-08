@@ -4,8 +4,10 @@ import Image from "next/image";
 import styles from "./styles/hero.module.css";
 import { FaStar } from "react-icons/fa";
 import { useConfirmation } from "@/components/confirmation/useConfirmation";
+import { useRouter } from "next/navigation";
 
 export default function Hero() {
+    const router = useRouter();
     const { confirm, ConfirmationElement } = useConfirmation();
 
     const handleCopyCode = async () => {
@@ -21,6 +23,10 @@ export default function Hero() {
             alert("Promo code copied!");
         }
     };
+
+    const exploreProduct = () => {
+        router.push("/products")
+    }
 
     return (
         <>
@@ -50,7 +56,7 @@ export default function Hero() {
                             <button className={styles.copyBtn} onClick={handleCopyCode}>Copy</button>
                         </div>
 
-                        <button className={styles.exploreBtn}>Explore Our Products</button>
+                        <button onClick={exploreProduct} className={styles.exploreBtn}>Explore Our Products</button>
 
                         <div className={styles.reviewSection}>
                             <div className={styles.rating}>

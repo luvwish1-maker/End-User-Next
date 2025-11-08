@@ -6,7 +6,7 @@ import { CartItems } from "../types/types";
 import styles from "./styles/page.module.css";
 import ProductsService from "../services/productService";
 import { BsX } from "react-icons/bs";
-import { BsShield, BsArrowRepeat, BsRepeat, BsTag } from "react-icons/bs";
+import { BsShield, BsRepeat, BsTag } from "react-icons/bs";
 import { useAlert } from "@/components/alert/alertProvider";
 import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
@@ -16,6 +16,7 @@ import Counts from "../shared/counts";
 import Test from "../shared/test";
 import Subscribe from "../shared/subscribe";
 import Random from "./random";
+import CouponsService from "../services/couponsService";
 
 export default function Cart() {
     const router = useRouter();
@@ -24,6 +25,61 @@ export default function Cart() {
     const [loading, setLoading] = useState(true);
     const [loadingItemId, setLoadingItemId] = useState<string | null>(null);
     const { showAlert } = useAlert();
+
+    // Coupon Sevice
+
+
+const [couponInput, setCouponInput] = useState("");
+const [couponLoading, setCouponLoading] = useState(false);
+
+const handleApplyCoupon = async () => {
+  if (!couponInput.trim()) {
+    showAlert({
+      message: "Please enter a coupon code",
+      type: "error",
+      duration: 3000,
+      autoDismiss: true,
+    });
+    return;
+  }
+  const token = authService.getToken();
+  if (!token) {
+    showAlert({
+      message: "You must be logged in to apply a coupon.",
+      type: "error",
+      duration: 3000,
+      autoDismiss: true,
+    });
+    return;
+  }
+  setCouponLoading(true);
+  try {
+    const cartId = cartItems[0]?.cartId || cartItems[0]?.id;
+    const res = await CouponsService.applyCoupon({
+      cartId,
+      couponName: couponInput.trim(),
+      token, 
+    });
+    showAlert({
+      message: res.data.message || "Coupon applied!",
+      type: "success",
+      duration: 2500,
+      autoDismiss: true,
+    });
+    fetchCart();
+    setCouponInput(""); // optional
+  } catch (err) {
+    let msg = "Failed to apply coupon";
+    if (err instanceof AxiosError) {
+      msg = err.response?.data?.message || msg;
+    }
+    showAlert({ message: msg, type: "error", duration: 3000 });
+  } finally {
+    setCouponLoading(false);
+  }
+};
+
+
 
     useEffect(() => {
         // ✅ Check if user is logged in
@@ -119,11 +175,21 @@ export default function Cart() {
         }
     };
 
+      const handleBuyNowClick = () => {
+         router.push('/deliveryAddress');
+      };
+
     const subtotal = totalAmount
-    const totalSavings = cartItems.reduce(
-        (acc, item) => acc + (item.product.actualPrice - item.product.discountedPrice) * item.quantity,
-        0
+    const totalSavings = cartItems
+    .filter(item => item?.product)
+    .reduce(
+        (acc, item) =>
+            acc +
+            ((item.product?.actualPrice ?? 0) - (item.product?.discountedPrice ?? 0)) *
+                (item.quantity ?? 0),
+            0
     );
+
 
     if (loading)
         return (
@@ -152,8 +218,8 @@ export default function Cart() {
 
                                 <div className={styles.imageWrapper}>
                                     <Image
-                                        src={item.product.images.find(img => img.isMain)?.url || ''}
-                                        alt={item.product.name}
+                                        src="/c1.png"
+                                        alt={item?.product?.name || "Product image"}
                                         width={128}
                                         height={144}
                                         className={styles.productImage}
@@ -161,14 +227,14 @@ export default function Cart() {
                                 </div>
 
                                 <div className={styles.details}>
-                                    <h4>{item.product.name}</h4>
-                                    <p>{item.product.description}</p>
+                                    <h4>{item?.product?.name}</h4>
+                                    <p>{item?.product?.description}</p>
                                     <div className={styles.priceRow}>
-                                        <span className={styles.discountedPrice}>₹{item.product.discountedPrice}</span>
-                                        <span className={styles.actualPrice}>₹{item.product.actualPrice}</span>
+                                        <span className={styles.discountedPrice}>₹{item?.product?.discountedPrice}</span>
+                                        <span className={styles.actualPrice}>₹{item?.product?.actualPrice}</span>
                                     </div>
                                     <span className={styles.savings}>
-                                        You save ₹{(item.product.actualPrice - item.product.discountedPrice).toFixed(2)}
+                                        You save ₹{(item?.product?.actualPrice - item?.product?.discountedPrice).toFixed(2)}
                                     </span>
                                     <span className={styles.stockBadge}>In Stock</span>
 
@@ -182,31 +248,37 @@ export default function Cart() {
                                 </div>
                             </div>
                         ))}
-                        <div className={styles.couponSection}>
-                            <h5 className={styles.couponHeading}>
-                                <span className={styles.couponIcon}><BsTag /> </span> Apply Coupon
-                            </h5>
-                            <div className={styles.couponInputRow}>
-                                <input
-                                    type="text"
-                                    placeholder="Enter coupon code"
-                                    className={styles.couponInput}
-                                />
-                                <button className={styles.couponApplyBtn}>Apply</button>
-                            </div>
-
-                            <hr className={styles.couponDivider} />
-
-                            <p className={styles.availableCoupons}>Available Coupons:</p>
-
-                            <div className={styles.availableCouponBox}>
-                                <div>
-                                    <p className={styles.couponCode}>SAVE10</p>
-                                    <p className={styles.couponDescription}>Get ₹130 off on orders above ₹999</p>
-                                </div>
-                                <button className={styles.couponSmallBtn}>APPLY</button>
-                            </div>
+                <div className={styles.couponSection}>
+                    <h5 className={styles.couponHeading}>
+                        <span className={styles.couponIcon}><BsTag /> </span> Apply Coupon
+                    </h5>
+                    <div className={styles.couponInputRow}>
+                        <input
+                        type="text"
+                        placeholder="Enter coupon code"
+                        className={styles.couponInput}
+                        value={couponInput}
+                        onChange={e => setCouponInput(e.target.value)}
+                        disabled={couponLoading}
+                        />
+                        <button
+                        className={styles.couponApplyBtn}
+                        disabled={couponLoading}
+                        onClick={handleApplyCoupon}
+                        >
+                        {couponLoading ? "Applying..." : "Apply"}
+                        </button>
+                    </div>
+                    <hr className={styles.couponDivider} />
+                    <p className={styles.availableCoupons}>Available Coupons:</p>
+                    <div className={styles.availableCouponBox}>
+                        <div>
+                        <p className={styles.couponCode}>SAVE10</p>
+                        <p className={styles.couponDescription}>Get ₹130 off on orders above ₹999</p>
                         </div>
+                        <button className={styles.couponSmallBtn} onClick={() => setCouponInput("SAVE10")}>APPLY</button>
+                    </div>
+                    </div>
                     </div>
 
                     <div className={styles.right}>
@@ -229,10 +301,10 @@ export default function Cart() {
                             <span className={styles.totalA}>₹{subtotal.toFixed(2)}</span>
                         </div>
                         {/* <button className={styles.addToCartBtn}>Add to cart</button> */}
-                        <button className={styles.buyNowBtn}>Buy Now</button>
+                        <button onClick={handleBuyNowClick} className={styles.buyNowBtn}>Buy Now</button>
                         <p className={styles.subInfoSub}><BsRepeat color="#A31157" size={15} /> Subscribe & Save 10%</p>
                         <p className={styles.subInfo}><BsShield color="#A31157" size={15} /> Secure Checkout</p>
-                        <p className={styles.subInfo}><BsArrowRepeat color="#A31157" size={15} /> Easy 30-day Returns</p>
+                        <p className={styles.subInfo}><BsShield color="#A31157" size={15} /> Easy 30-day Returns</p>
                     </div>
                 </div>
             </div>

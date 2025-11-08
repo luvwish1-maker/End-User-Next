@@ -36,7 +36,7 @@ export default function LoginModal({ onClose, onLoginSuccess }: LoginModalProps)
         return Object.keys(newErrors).length === 0;
     };
 
-    const handleSubmit = async (e: React.FormEvent) => {
+ const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!validateForm()) return;
         setLoading(true);
@@ -50,7 +50,7 @@ export default function LoginModal({ onClose, onLoginSuccess }: LoginModalProps)
             const status = axiosError.response?.status;
             const message = axiosError.response?.data?.message;
 
-            if (status === 401) {
+            if(status === 409) {
                 try {
                     await authService.signup({ email, password });
                     await authService.login(email, password);
@@ -59,13 +59,24 @@ export default function LoginModal({ onClose, onLoginSuccess }: LoginModalProps)
                     const signupError = signupErr as AxiosError<ApiErrorResponse>;
                     setError({ general: signupError.response?.data?.message || "Signup failed" });
                 }
-            } else {
+            }
+             else if (status === 401) {
+                try {
+                    await authService.signup({ email, password });
+                    await authService.login(email, password);
+                    onLoginSuccess();
+                } catch (signupErr) {
+                    const signupError = signupErr as AxiosError<ApiErrorResponse>;
+                    setError({ general: signupError.response?.data?.message || "Signup failed" });
+                }
+            } 
+            else {
                 setError({ general: message || "Login failed" });
             }
         } finally {
             setLoading(false);
         }
-    };
+ }
 
     return (
         <div className={styles.overlay}>

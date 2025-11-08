@@ -13,7 +13,6 @@ import Counts from "../shared/counts";
 import Test from "../shared/test";
 import Subscribe from "../shared/subscribe";
 import Sorted from "./sorted";
-import Payment from "../payment/payment";
 import ProductsService from "../services/productService";
 import { Product } from "../types/types";
 
@@ -276,7 +275,6 @@ export default function Allproducts() {
         </div>
       </div>
 
-      <Payment />
       <Solution />
       <div className={styles.countsWrapper}>
         <Counts />

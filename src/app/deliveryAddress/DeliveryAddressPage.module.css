@@ -1,0 +1,327 @@
+.deliveryLayout {
+  margin-left: 60px;
+  margin-right: 60px;
+  display: grid;
+  grid-template-columns: 1fr 350px;
+  gap: 32px;
+  background: #fff;
+  padding: 32px;
+  min-height: 100vh;
+}
+
+.leftColumn { padding-right: 12px; }
+
+.heading { font-size: 48px; font-weight: 400; }
+
+.subheading { color: #666; font-size: 16px; margin-bottom: 24px; }
+
+.addressSection {
+  background: #fff;
+  border-radius: 12px;
+  padding: 16px 0 32px 0;
+}
+
+.addressLabel {
+  font-size: 1rem;
+  font-weight: 600;
+  color: black;
+  margin-bottom: 12px;
+}
+
+.savedAddress {
+  border: 1px solid #E5E5E5;
+  background: #fff;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.addressTag,
+.addressTagDefault {
+  font-weight: 500;
+  color: black;
+  margin-bottom: 8px;
+}
+.addressTagDefault { color: #333; }
+
+.defaultBadge {
+  background: #FFE5EF;
+  color: #800D45;
+  font-size: 11px;
+  border-radius: 7px;
+  padding: 2px 6px;
+  margin-left: 8px;
+  font-weight: 600;
+}
+
+.addressText { color: #333; font-size: 14px; }
+
+.addAddressForm {
+  background: #FCF5F9;
+  border-radius: 10px;
+  padding: 18px 14px;
+  margin-bottom: 16px;
+}
+
+.formTitle { color: black; font-size: 17px; font-weight: 500; margin-bottom: 10px; }
+
+.formRow { display: flex; gap: 12px; margin-bottom: 8px; }
+
+.input {
+  padding: 10px;
+  border-radius: 7px;
+  border: 1px solid #e0e0e0;
+  background: #fafafa;
+  font-size: 15px;
+  width: 100%;
+  outline: none;
+  margin-bottom: 6px;
+}
+
+.saveAddressBtn {
+  margin-top: 8px;
+  background: #d81b60;
+  color: white;
+  border: none;
+  border-radius: 7px;
+  padding: 10px 18px;
+  font-size: 15px;
+  font-weight: 500;
+  transition: background 0.2s;
+  cursor: pointer;
+}
+.saveAddressBtn:disabled { opacity: 0.7; cursor: not-allowed; }
+.saveAddressBtn:hover { background: #b31551; }
+
+.deliveryOptions {
+  margin-top: 16px;
+  background: #fff;
+  border-radius: 10px;
+  padding: 16px;
+  border: 1px solid #eee;
+}
+.optionsTitle { font-size: 16px; color: black; font-weight: 500; margin-bottom: 8px; }
+
+.optionCard,
+.optionCardActive {
+  border: 1.5px solid #eee;
+  background: #fff;
+  border-radius: 7px;
+  margin-bottom: 12px;
+  padding: 14px 16px;
+  cursor: pointer;
+  font-weight: 500;
+  position: relative;
+  transition: border 0.2s;
+}
+.optionCardActive {
+  border: 2px solid #d81b60;
+  background: #fff0f3;
+}
+
+.optionCardMain {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 15px;
+}
+.optionRadio {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid #d81b60;
+  background: #fff;
+}
+
+.optionFee {
+  margin-left: auto;
+  color: green;
+  font-weight: 600;
+}
+.optionFeePaid {
+  margin-left: auto;
+  color: black;
+  font-weight: 600;
+}
+
+.optionSubtext { color: #666; font-size: 13px; margin-top: 3px; }
+
+.badgeFooter {
+  justify-content: space-between;
+  margin-top: 30px;
+  display: flex;
+  gap: 28px;
+}
+.badge {
+  color: black;
+  font-weight: 400;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.Lock, .Box, .Truck, .Return {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+  background: #fff;
+  border-radius: 20px;
+  padding: 10px 15px 10px 10px;
+  border: 1px solid #FFE5EF;
+}
+
+.right {
+    flex: 1;
+    border: 1px solid #FFE5EF;
+    padding: 20px;
+    border-radius: 10px;
+    height: fit-content;
+    /* order: -1; */
+}
+
+.summaryItem {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.subtotaln,
+.subtotalA,
+.proSavingsN {
+  font-family: Inter, sans-serif;
+  line-height: 20px;
+  font-weight: 400;
+  font-size: 14px;
+}
+.subtotaln { color: #6B6B76; }
+.subtotalA { color: #0F0F12; }
+.proSavingsN { color: #1F8A5B; }
+.total {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  font-size: 16px;
+  margin-top: 8px;
+}
+.totalN,
+.totalA {
+  font-family: Poppins, sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 28px;
+}
+.totalN { color: #0F0F12; }
+.totalA { color: #A31157; }
+
+.buyNowBtn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  background: transparent;
+  color: #C61469;
+  border: 1px solid #C61469;
+  transition: background 0.2s, color 0.2s;
+}
+.buyNowBtn:disabled { opacity: 0.7; cursor: not-allowed; }
+.buyNowBtn:hover { background: #C61469; color: #fff; }
+
+.subInfoSub,
+.subInfo {
+  font-size: 12px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+.subInfoSub { color: #A31157; margin-top: 15px; }
+.subInfo { color: #6B6B76; }
+
+.errorMsg {
+  color: #d81b60;
+  font-size: 12px;
+  margin-bottom: 4px;
+  padding-left: 3px;
+}
+
+/* Responsive styles */
+@media (max-width: 1024px) {
+  .deliveryLayout {
+    grid-template-columns: 1fr;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 20px 8px;
+    gap: 18px;
+    min-height: auto;
+  }
+  .leftColumn {
+    padding-right: 0;
+    margin-bottom: 32px;
+  }
+  .right {
+    width: 100%;
+    margin-top: 32px;
+    padding: 18px 12px;
+  }
+}
+@media (max-width: 768px) {
+  .deliveryLayout {
+    display: block;
+    padding: 12px 0 18px 0;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .leftColumn {
+    width: 100%;
+    padding: 0;
+    margin-bottom: 30px;
+  }
+  .addressSection, 
+  .deliveryOptions, 
+  .badgeFooter {
+    padding: 12px 6px;
+  }
+  .right {
+    width: 100%;
+    padding: 14px 5px;
+    margin-top: 18px;
+  }
+  .heading {
+    font-size: 32px;
+    text-align: center;
+  }
+  .subheading {
+    font-size: 13px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .formTitle, .optionsTitle { font-size: 15px; }
+  .saveAddressBtn, .buyNowBtn { font-size: 14px; padding: 8px }
+  .formRow { flex-direction: column; gap: 4px; }
+}
+@media (max-width: 500px) {
+  .deliveryLayout, .leftColumn, .right {
+    margin: 0 !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+  }
+  .badgeFooter {
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .summaryItem, .total {
+    font-size: 13px;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .totalN, .totalA { font-size: 15px; }
+  .buyNowBtn, .saveAddressBtn {
+    font-size: 13px;
+    padding: 8px 0;
+  }
+}

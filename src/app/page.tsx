@@ -12,7 +12,6 @@ export default function Home() {
     <div>
       <Hero />
       <Category />
-
       <div className={styles.head}>
         <h3>Painful Periods? <span>We got you</span></h3>
         <p>Cramps. Mood swings. Leaks. Still expected to perform ? You deserve better support.</p>

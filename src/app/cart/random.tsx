@@ -106,7 +106,7 @@ export default function Random() {
                         <div className={styles.imageWrapper}>
                             {mainImage && (
                                 <Image
-                                    src={mainImage.url}
+                                    src="/c1.png"
                                     alt={mainImage.altText || product.name}
                                     width={270}
                                     height={340}
