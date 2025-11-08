@@ -1,0 +1,142 @@
+.container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+    padding: 20px;
+    margin-top: 20px;
+    box-sizing: border-box;
+    justify-content: center;
+}
+
+.productCard {
+    width: 100%;
+    max-width: 350px;
+    height: 450px;
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid #0000001a;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 8px 15px 8px;
+    box-sizing: border-box;
+}
+
+.productCard:hover {
+    transform: translateY(-4px);
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.imageWrapper {
+    width: 100%;
+    height: 280px;
+    overflow: hidden;
+    border-radius: 10px;
+    border: 1px solid #0000001a;
+}
+
+.productImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.productCard:hover .productImage {
+    transform: scale(1.03);
+}
+
+.productCategory {
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    color: #999;
+    margin-top: 8px;
+}
+
+.productName {
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: #333;
+    margin: 5px 0;
+    min-height: 40px;
+    padding: 0 8px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.priceRow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    margin-top: 6px;
+}
+
+.discountedPrice {
+    font-weight: 600;
+    font-size: 16px;
+    color: #333;
+}
+
+.actualPrice {
+    font-weight: 500;
+    font-size: 14px;
+    text-decoration: line-through;
+    color: #999;
+}
+
+.discountTag {
+    font-weight: 600;
+    font-size: 12px;
+    color: #5cbd57;
+}
+
+.cartButton {
+    width: 120px;
+    height: 34px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    border-radius: 6px;
+    padding: 6px 10px;
+    color: #ffffff;
+    background-color: #a31157;
+    font-family: "Inter", sans-serif;
+    font-weight: 500;
+    margin-top: auto;
+    font-size: 13px;
+    border: 1px solid #a31157;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.cartButton:hover {
+    color: #a31157;
+    background-color: #ffffff;
+}
+
+@media (max-width: 1200px) {
+    .container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
+    .container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+}
